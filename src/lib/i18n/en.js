@@ -1,8 +1,9 @@
 export default {
-	common: { toTop: '↑ Top', backToTop: 'Back to top', languageLabel: 'Language', switchLanguage: 'Change language', toc: { nav: 'Section navigation', title: 'On this page', open: 'Open section menu', close: 'Close section menu' } },
+	common: { toTop: '↑ Top', backToTop: 'Back to top', visit: 'Visit', languageLabel: 'Language', switchLanguage: 'Change language', toc: { nav: 'Section navigation', title: 'On this page', open: 'Open section menu', close: 'Close section menu' } },
 	theme: { toLight: 'Switch to light theme', toDark: 'Switch to dark theme', toggle: 'Toggle theme' },
 	topbar: { nav: 'Ergo sections', links: { technology: { label: 'Technology', short: 'Tech' }, economics: { label: 'Economics', short: 'Economy' }, applications: { label: 'Applications', short: 'Apps' }, mission: { label: 'Mission', short: 'Mission' } } },
 	home: {
+		meta: { title: 'Ergo Basics — Contractual Money', description: 'A visual, sourced introduction to Ergo: eUTXO, ErgoScript, Sigma protocols, storage rent and its financial ecosystem.' },
 		hero: { eyebrow: 'Programmable money, built from first principles', title: 'Ergo is a blockchain for contractual money.', body: 'Bitcoin-inspired security, expressive eUTXO contracts and privacy-preserving proofs — engineered for useful finance without trusted intermediaries.', primary: 'Understand the technology', secondary: 'Explore the ecosystem', note: 'Proof of Work · launched 1 July 2019 · no ICO · no VC allocation' },
 		index: { sections: { foundations: 'Foundations', boxes: 'Boxes', proofs: 'Proofs', sustainability: 'Sustainability', economics: 'Economics', applications: 'Applications', community: 'Ideas', mission: 'Mission', sources: 'Sources' } },
 		foundations: { eyebrow: 'The foundation', title: 'Conservative consensus. Modern contracts.', intro: 'Ergo starts with the battle-tested UTXO and Proof-of-Work ideas, then extends them deliberately — without turning validation into an open-ended computation.', cards: [
