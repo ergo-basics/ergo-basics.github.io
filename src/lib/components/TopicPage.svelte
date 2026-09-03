@@ -12,9 +12,13 @@
 	};
 	$: keys = map[topic] || [];
 	$: title = $t(`topbar.links.${topic}.label`);
+	$: description = $t(`home.${keys[0]}.intro`) || $t(`home.${keys[0]}.body`);
 </script>
 
-<svelte:head><title>{title} — Ergo Basics</title></svelte:head>
+<svelte:head>
+	<title>{title} — Ergo Basics</title>
+	<meta name="description" content={description} />
+</svelte:head>
 <SiteTopbar {title} position="sticky" />
 <main>
 	<a class="back" href={$href('/')}>← Ergo Basics</a>
@@ -25,7 +29,7 @@
 			{#if section.intro}<p class="lead">{section.intro}</p>{/if}
 			{#if section.body}<p class="lead">{section.body}</p>{/if}
 			{#if section.quote}<blockquote>{section.quote}</blockquote>{/if}
-			{#if section.cards}<div class="grid">{#each section.cards as card}<article><h2>{card.title}</h2><p>{card.text}</p>{#if card.link}<a href={card.link} target="_blank" rel="noreferrer">Visit ↗</a>{/if}</article>{/each}</div>{/if}
+			{#if section.cards}<div class="grid">{#each section.cards as card}<article><h2>{card.title}</h2><p>{card.text}</p>{#if card.link}<a href={card.link} target="_blank" rel="noopener noreferrer">{$t('common.visit')} <span aria-hidden="true">↗</span></a>{/if}</article>{/each}</div>{/if}
 			{#if section.points}<div class="grid">{#each section.points as item}<article><small>{item.n}</small><h2>{item.title}</h2><p>{item.text}</p></article>{/each}</div>{/if}
 			{#if section.stats}<div class="stats">{#each section.stats as stat}<div><strong>{stat.value}</strong><span>{stat.label}</span></div>{/each}</div>{/if}
 			{#if section.links}<div class="links">{#each section.links as link}<a href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</a>{/each}</div>{/if}

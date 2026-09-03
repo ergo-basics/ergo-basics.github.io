@@ -6,8 +6,12 @@
 </script>
 
 <svelte:head>
-	<title>Ergo Basics — Contractual Money</title>
-	<meta name="description" content="A visual, sourced introduction to Ergo: eUTXO, ErgoScript, Sigma protocols, storage rent and its financial ecosystem." />
+	<title>{$t('home.meta.title')}</title>
+	<meta name="description" content={$t('home.meta.description')} />
+	<meta name="theme-color" content="#171717" />
+	<meta property="og:title" content={$t('home.meta.title')} />
+	<meta property="og:description" content={$t('home.meta.description')} />
+	<meta property="og:type" content="website" />
 </svelte:head>
 
 <SectionIndex {sections} />
@@ -18,7 +22,7 @@
 		<div class="hero-inner">
 			<p class="eyebrow">{$t('home.hero.eyebrow')}</p>
 			<div class="mark" aria-hidden="true"><span>Σ</span></div>
-			<h1>{@html $t('home.hero.title')}</h1>
+			<h1>{$t('home.hero.title')}</h1>
 			<p class="hero-copy">{$t('home.hero.body')}</p>
 			<div class="actions"><a class="primary" href={$href('/technology')}>{$t('home.hero.primary')} <span>↗</span></a><a href="#applications">{$t('home.hero.secondary')} <span>↓</span></a></div>
 			<p class="note">{$t('home.hero.note')}</p>
@@ -42,7 +46,7 @@
 
 		<section class="block manifesto" id="mission"><p class="eyebrow">{$t('home.mission.eyebrow')}</p><h2>{$t('home.mission.title')}</h2><p>{$t('home.mission.body')}</p><div class="actions">{#each $t('home.mission.links') as link}<a href={link.href} target="_blank" rel="noreferrer">{link.label} <span>↗</span></a>{/each}</div></section>
 
-		<section class="block sources" id="sources"><p class="eyebrow">{$t('home.sources.eyebrow')}</p><h2>{$t('home.sources.title')}</h2><p class="intro">{$t('home.sources.body')}</p><div class="source-links">{#each $t('home.sources.links') as link}<a href={link.href} target="_blank" rel="noreferrer">{link.label}<span>↗</span></a>{/each}</div></section>
+		<section class="block sources" id="sources"><p class="eyebrow">{$t('home.sources.eyebrow')}</p><h2>{$t('home.sources.title')}</h2><p class="intro">{$t('home.sources.body')}</p><div class="source-links">{#each $t('home.sources.links') as link}<a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}<span aria-hidden="true">↗</span></a>{/each}</div></section>
 	</div>
 </main>
 
