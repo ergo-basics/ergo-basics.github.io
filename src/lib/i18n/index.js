@@ -64,23 +64,8 @@ import en from './en.js';
 
 /** Everything the language switcher needs to render itself. */
 export const LOCALES = [
-	{ code: 'en', label: 'English', short: 'EN' },
-	{ code: 'zh', label: '中文', short: '中文' },
-	{ code: 'es', label: 'Español', short: 'ES' },
-	{ code: 'hi', label: 'हिन्दी', short: 'हि' },
-	{ code: 'pt', label: 'Português', short: 'PT' },
-	{ code: 'ru', label: 'Русский', short: 'RU' },
-	{ code: 'id', label: 'Bahasa Indonesia', short: 'ID' },
-	{ code: 'ar', label: 'العربية', short: 'AR', dir: 'rtl' },
-	{ code: 'fr', label: 'Français', short: 'FR' },
-	{ code: 'de', label: 'Deutsch', short: 'DE' },
-	{ code: 'ko', label: '한국어', short: '한국어' },
-	{ code: 'tr', label: 'Türkçe', short: 'TR' },
-	{ code: 'vi', label: 'Tiếng Việt', short: 'VI' },
-	{ code: 'uk', label: 'Українська', short: 'UK' },
-	{ code: 'ja', label: '日本語', short: '日本語' },
-	{ code: 'sw', label: 'Kiswahili', short: 'SW' },
-	{ code: 'ro', label: 'Română', short: 'RO' }
+	{ code: 'en', label: 'English', short: 'EN', dir: 'ltr' },
+	{ code: 'es', label: 'Español', short: 'ES', dir: 'ltr' }
 ];
 
 export const DEFAULT_LOCALE = 'en';
@@ -98,22 +83,7 @@ const RTL_LOCALES = new Set(LOCALES.filter((l) => l.dir === 'rtl').map((l) => l.
  * locale, so there is no meaningful world in which it isn't needed).
  */
 const LOADERS = {
-	es: () => import('./es.js'),
-	zh: () => import('./zh.js'),
-	hi: () => import('./hi.js'),
-	ru: () => import('./ru.js'),
-	fr: () => import('./fr.js'),
-	pt: () => import('./pt.js'),
-	sw: () => import('./sw.js'),
-	ja: () => import('./ja.js'),
-	ar: () => import('./ar.js'),
-	de: () => import('./de.js'),
-	id: () => import('./id.js'),
-	ko: () => import('./ko.js'),
-	ro: () => import('./ro.js'),
-	tr: () => import('./tr.js'),
-	uk: () => import('./uk.js'),
-	vi: () => import('./vi.js')
+	es: () => import('./es.js')
 };
 
 /** @type {Record<string, any>} code -> dictionary, once loaded. */

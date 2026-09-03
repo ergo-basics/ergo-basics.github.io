@@ -1,1 +1,1 @@
-export { entries } from './entries.js';
+export { entries } from '../entries.js';

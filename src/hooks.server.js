@@ -16,26 +16,8 @@
  * the browser-safe subset, and this list is small and rarely changes.
  */
 
-const SUPPORTED = [
-	'en',
-	'es',
-	'zh',
-	'hi',
-	'ru',
-	'fr',
-	'pt',
-	'sw',
-	'ja',
-	'ar',
-	'de',
-	'id',
-	'ko',
-	'ro',
-	'tr',
-	'uk',
-	'vi'
-];
-const RTL = new Set(['ar']);
+const SUPPORTED = ['en', 'es'];
+const RTL = new Set();
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
