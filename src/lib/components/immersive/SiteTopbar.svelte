@@ -2,11 +2,8 @@
 	/*
 	 * SiteTopbar — the fixed bar shared by every immersive page.
 	 *
-	 * Before this existed each page owned a private "← Back to home"
-	 * strip, so there was no way to move between the audience pages
-	 * without going via the landing page. Now the three audience routes
-	 * (+ the paradigm deep dive) are always one click away, and the
-	 * current one is marked with aria-current.
+	 * The four topic routes are always one click away, and the current
+	 * one is marked with aria-current.
 	 *
 	 * Deliberately not in +layout.svelte: the landing page has its own
 	 * SectionIndex rail and hero, and a second fixed bar there would
@@ -34,10 +31,10 @@
 	// Only the destinations live here; both labels come from the
 	// dictionary under topbar.links.<key>.
 	const links = [
-		{ key: 'depin', href: '/depin' },
-		{ key: 'developers', href: '/developers' },
-		{ key: 'users', href: '/users' },
-		{ key: 'paradigm', href: '/paradigm' }
+		{ key: 'technology', href: '/technology' },
+		{ key: 'economics', href: '/economics' },
+		{ key: 'applications', href: '/applications' },
+		{ key: 'mission', href: '/mission' }
 	];
 
 	// Compare against the canonical, unprefixed path — /es/depin and
@@ -48,7 +45,7 @@
 <header class="topbar" class:sticky={position === 'sticky'}>
 	<a class="home-link" href={$href('/')}>
 		<span aria-hidden="true">←</span>
-		<span class="wordmark">CELAUT</span>
+		<span class="wordmark">ERGO BASICS</span>
 	</a>
 
 	{#if title}
