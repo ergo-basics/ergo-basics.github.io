@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="%lang%" dir="%dir%">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			// hooks.server.js already fills in %lang%/%dir% above from the
+			// URL — correct from byte one for a prefixed route (/es/…), and
+			// "en"/"ltr" for an unprefixed one, since the URL alone carries
+			// no locale there. This script's job is narrower: on an
+			// UNPREFIXED route only, apply a saved/preferred language before
+			// first paint, so a returning visitor doesn't flash English.
+			// A prefixed route is left untouched — the URL is authoritative,
+			// and a stale saved preference for a different language must
+			// not override it here.
+			(function () {
+				try {
+					// prettier-ignore
+					var supported = ['en', 'es'];
+					var rtl = [];
+					var seg = location.pathname.split('/')[1];
+					if (supported.indexOf(seg) !== -1) return;
+
+					function apply(code) {
+						document.documentElement.setAttribute('lang', code);
+						document.documentElement.setAttribute(
+							'dir',
+							rtl.indexOf(code) !== -1 ? 'rtl' : 'ltr'
+						);
+					}
+					var saved = localStorage.getItem('ergo-lang');
+					if (supported.indexOf(saved) !== -1) {
+						apply(saved);
+						return;
+					}
+					var tags = [navigator.language].concat(navigator.languages || []);
+					for (var i = 0; i < tags.length; i++) {
+						var base = String(tags[i] || '').toLowerCase().split('-')[0];
+						if (supported.indexOf(base) !== -1) {
+							apply(base);
+							return;
+						}
+					}
+				} catch (e) {
+					/* keep the server-resolved lang/dir */
+				}
+			})();
+			// Apply the saved / preferred theme before first paint (no flash).
+			(function () {
+				try {
+					var saved = localStorage.getItem('ergo-theme');
+					var t =
+						saved === 'light' || saved === 'dark'
+							? saved
+							: window.matchMedia &&
+								  window.matchMedia('(prefers-color-scheme: light)').matches
+								? 'light'
+								: 'dark';
+					document.documentElement.setAttribute('data-theme', t);
+				} catch (e) {
+					document.documentElement.setAttribute('data-theme', 'dark');
+				}
+			})();
+		</script>
+		%sveltekit.head%
+	</head>
+	<body style="margin: 0;" data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

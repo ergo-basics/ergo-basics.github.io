@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ergo Basics">
+	<!--
+		A box. Ergo's one irreducible primitive: value, tokens, registers
+		and a guarding script, sealed together and spent whole. The open
+		right edge is the spend — a box is consumed to create the next.
+	-->
+	<rect width="64" height="64" rx="14" fill="#ff5e18" />
+	<path
+		d="M20 18h24M20 32h16M20 46h24"
+		stroke="#0d0e12"
+		stroke-width="5"
+		stroke-linecap="round"
+	/>
+	<path d="M20 18v28" stroke="#0d0e12" stroke-width="5" stroke-linecap="round" />
+</svg>

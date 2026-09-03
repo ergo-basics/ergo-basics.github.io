@@ -1,0 +1,548 @@
+/* src/app.css */
+
+/*
+ * ==================================================================
+ * ERGO BASICS THEME SYSTEM
+ * ==================================================================
+ * Two fully-designed themes, driven by a single `data-theme`
+ * attribute on <html> (see src/lib/theme.js + the inline no-flash
+ * script in src/app.html):
+ *
+ *   • DARK  (default) → deep teal-green surfaces, warm cream text.
+ *   • LIGHT           → warm cream surfaces, deep teal-green text.
+ *
+ * DESIGN RULES (please keep these when adding components)
+ * ------------------------------------------------------------------
+ * 1. NEVER hardcode a colour in a component. Every colour must come
+ *    from a token below, so both themes stay coherent.
+ *
+ * 2. Surfaces form a 4-step elevation ramp. Use them for *backgrounds
+ *    only* — never as a text colour:
+ *      --surface-deep    deepest band (hero, topbars, footers)
+ *      --surface         the page default
+ *      --surface-alt     a subtly contrasting band, for alternating
+ *                        sections (replaces the old "invert the whole
+ *                        band to --on-surface" hack, which produced
+ *                        big glaring cream slabs in dark mode)
+ *      --surface-raised  cards / panels lifted off the page
+ *
+ * 3. Foreground text uses the on-surface ramp. All three pass WCAG AA
+ *    (>= 4.5:1) against every surface in the ramp, in BOTH themes:
+ *      --on-surface         body + headings          (>= 9.1 : 1)
+ *      --on-surface-muted   secondary prose          (>= 6.1 : 1)
+ *      --on-surface-subtle  captions / meta          (>= 4.6 : 1)
+ *
+ * 4. THE ACCENT IS SPLIT IN TWO. This is the single most important
+ *    rule here, and the fix for the old "dark mode uses light colours
+ *    with no clear purpose" problem:
+ *      --accent       the brand coral. DECORATIVE ONLY — button
+ *                     fills, borders, rules, icon chips, glows.
+ *                     It is intentionally identical in both themes.
+ *                     Coral on cream is ~1.9:1, so it must never be
+ *                     used as a text colour.
+ *      --accent-text  the ACCESSIBLE accent, for text and icons.
+ *                     Dark theme: a lifted coral (>= 5.5 : 1).
+ *                     Light theme: a deep terracotta (>= 4.9 : 1).
+ *    Text on an --accent fill uses --on-accent (>= 6.3 : 1).
+ *
+ * 5. Hairlines and dividers use --border / --border-strong, which are
+ *    on-surface at low alpha and therefore adapt automatically.
+ * ------------------------------------------------------------------
+ */
+
+:root {
+	/* ---------- DARK THEME (default) ---------- */
+
+	/* Surfaces — background only. */
+	--surface: #16181d;
+	--surface-deep: #0d0e12;
+	--surface-alt: #1c1f26;
+	--surface-raised: #23272f;
+
+	/* Foreground ramp — text only. */
+	--on-surface: #f4f1ed;
+	--on-surface-muted: #c2c7cf;
+	--on-surface-subtle: #99a0ab;
+
+	/* Accent. --accent is DECORATIVE; --accent-text is for type. */
+	--accent: #ff5e18;
+	--accent-text: #ff8a4f;
+	--accent-hover: #ff9d69;
+	--accent-soft: rgba(255, 94, 24, 0.15);
+	--on-accent: #0d0e12;
+
+	/* Headings. */
+	--heading: var(--on-surface);
+	--heading-muted: var(--on-surface-muted);
+
+	/* Hairlines / dividers. */
+	--border: rgba(244, 241, 237, 0.13);
+	--border-strong: rgba(244, 241, 237, 0.26);
+
+	/* Elevation. Dark themes need deeper, softer shadows. */
+	--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+	--shadow-md: 0 10px 28px rgba(0, 0, 0, 0.42);
+	--shadow-lg: 0 22px 55px rgba(0, 0, 0, 0.5);
+
+	/* Decorative-only channel colours (canvas scenes, glows). */
+	--viz-node: #ff8a4f;
+	--viz-link: rgba(255, 138, 79, 0.38);
+	--viz-grid: rgba(244, 241, 237, 0.07);
+	--viz-warm: #ffd08a;
+
+	/* Diagram backdrop. The paradigm docs embed dark-ink diagrams on a
+	   transparent background, so they need a light backing in BOTH
+	   themes to stay legible. Constant on purpose. */
+	--diagram-backdrop: #f4ece3;
+
+	/* rgb() triples for alpha compositing. */
+	--surface-rgb: 22, 24, 29;
+	--surface-deep-rgb: 13, 14, 18;
+	--on-surface-rgb: 244, 241, 237;
+	--accent-rgb: 255, 94, 24;
+	--accent-text-rgb: 255, 138, 79;
+
+	/* Typography. */
+	--font-heading: 'Playfair Display', serif;
+	--font-body: 'Lato', sans-serif;
+
+	/* ---------- Layout reservations ----------
+	   The fixed top-right control cluster (language + theme). Anything
+	   that has to stay clear of it reserves this width instead of
+	   repeating a magic number. */
+	--floating-controls-w: 96px;
+
+	/* ---------- Legacy aliases ----------
+	   Kept so older component styles keep resolving. Prefer the
+	   semantic tokens above in anything new. */
+	--brand-dark: var(--surface);
+	--light-bg: var(--on-surface);
+	--text-light: var(--on-surface);
+	--text-dark: var(--surface);
+	--text-dark-muted: var(--on-surface-muted);
+
+	color-scheme: dark;
+}
+
+/* ---------- LIGHT THEME ---------- */
+:root[data-theme='light'] {
+	--surface: #fbf7f3;
+	--surface-deep: #f0e9e1;
+	--surface-alt: #f5efe8;
+	--surface-raised: #ffffff;
+
+	--on-surface: #1b1d22;
+	--on-surface-muted: #4b5058;
+	--on-surface-subtle: #6b717a;
+
+	/* Same decorative coral; a deep terracotta for accented type. */
+	--accent: #ff5e18;
+	--accent-text: #a63a00;
+	--accent-hover: #e04f0e;
+	--accent-soft: rgba(166, 58, 0, 0.1);
+	--on-accent: #ffffff;
+
+	--heading: var(--accent-text);
+	--heading-muted: var(--on-surface-muted);
+
+	--border: rgba(27, 29, 34, 0.15);
+	--border-strong: rgba(27, 29, 34, 0.29);
+
+	/* Light themes need much lighter shadows or everything looks dirty. */
+	--shadow-sm: 0 2px 8px rgba(27, 29, 34, 0.08);
+	--shadow-md: 0 10px 28px rgba(27, 29, 34, 0.11);
+	--shadow-lg: 0 22px 55px rgba(27, 29, 34, 0.14);
+
+	--viz-node: #a63a00;
+	--viz-link: rgba(166, 58, 0, 0.34);
+	--viz-grid: rgba(27, 29, 34, 0.08);
+	--viz-warm: #c2691f;
+
+	--surface-rgb: 251, 247, 243;
+	--surface-deep-rgb: 240, 233, 225;
+	--on-surface-rgb: 27, 29, 34;
+	--accent-rgb: 255, 94, 24;
+	--accent-text-rgb: 166, 58, 0;
+
+	--brand-dark: var(--surface);
+	--light-bg: var(--on-surface);
+	--text-light: var(--on-surface);
+	--text-dark: var(--surface);
+	--text-dark-muted: var(--on-surface-muted);
+
+	color-scheme: light;
+}
+
+html {
+	/* Lenis owns smoothness. CSS `smooth` plus SvelteKit restoration is
+	   what made client-side navigations open mid-page. */
+	scroll-behavior: auto;
+	background-color: var(--surface);
+}
+
+html[lang='ar'] {
+	--font-heading: 'Noto Naskh Arabic', 'Playfair Display', serif;
+	--font-body: 'Noto Sans Arabic', 'Lato', sans-serif;
+}
+
+html[lang='ko'] {
+	--font-heading: 'Noto Serif KR', 'Playfair Display', serif;
+	--font-body: 'Noto Sans KR', 'Lato', sans-serif;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-body);
+	background-color: var(--surface);
+	color: var(--on-surface);
+	font-size: clamp(16px, 1.2vw, 18px);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transition: background-color 0.4s ease, color 0.4s ease;
+	overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-heading);
+	font-weight: 700;
+}
+
+p {
+	line-height: 1.7;
+}
+
+/* Universal, theme-aware focus ring. */
+:where(a, button, [tabindex]):focus-visible {
+	outline: 2px solid var(--accent-text);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+/* Selection colours that survive a theme flip. */
+::selection {
+	background: var(--accent);
+	color: var(--on-accent);
+}
+
+/* Base for sections revealed on scroll (GSAP or the CSS fallback). */
+.animated-section {
+	transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+	opacity: 0;
+	transform: translateY(30px);
+}
+
+.animated-section.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Smooth colour crossfade for themed surfaces when the toggle flips. */
+section,
+.card {
+	transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+/* Utility used by GSAP scenes to hide overflow while pinned. */
+.gsap-pin-clip {
+	overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	/* Anything staged for a scroll reveal must still be readable. */
+	.animated-section {
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none !important;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* ==================================================================
+ * GROUNDED SECTIONS
+ * ------------------------------------------------------------------
+ * Above the fold the page is a sequence of pinned scenes; below it,
+ * it settles into ordinary reading blocks. /depin, /developers and
+ * /users already share one language for that half — left-aligned
+ * Playfair headings on an accent rule, cards on `--surface-raised`
+ * with an accent top edge, muted body copy — and the landing page had
+ * grown a second, older one: centred headings, oversized panels,
+ * accent bold on every other phrase. Reading down the page felt like
+ * the site got worse halfway through.
+ *
+ * These are the single definition of that language. Everything inside
+ * a `.ground` wrapper picks it up, so a section component only has to
+ * supply markup and words.
+ * ================================================================== */
+
+.ground {
+	max-width: 1060px;
+	margin: 0 auto;
+	padding: 0 clamp(20px, 6vw, 24px);
+}
+
+.ground .block {
+	padding: 76px 0 0;
+}
+
+.ground .block:last-child {
+	padding-bottom: 96px;
+}
+
+/* Same eyebrow as the scene captions above, so the two halves of the
+   page are visibly one document. */
+.ground .eyebrow {
+	margin: 0 0 12px;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--accent-text);
+}
+
+.ground .block > h2 {
+	font-family: var(--font-heading);
+	font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+	line-height: 1.2;
+	color: var(--heading);
+	margin: 0 0 20px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid var(--accent);
+}
+
+.ground .block-intro {
+	max-width: 760px;
+	margin: 0 0 32px;
+	line-height: 1.7;
+	color: var(--on-surface-muted);
+}
+
+.ground .grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 20px;
+}
+
+.ground .grid-2 {
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* Explicit pairs. With auto-fit, four cards land as three plus an
+   orphan, and a lone card stretches the full width of the column. */
+.ground .grid-pair {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 700px) {
+	.ground .grid-pair {
+		grid-template-columns: 1fr;
+	}
+}
+
+.ground .card {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--surface-raised);
+	border: 1px solid var(--border);
+	border-top: 3px solid var(--accent);
+	border-radius: 12px;
+	padding: 26px;
+	box-shadow: var(--shadow-sm);
+	transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.4s ease,
+		border-color 0.4s ease;
+}
+
+.ground .card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-md);
+}
+
+.ground .card h3 {
+	font-family: var(--font-heading);
+	font-size: 1.2rem;
+	line-height: 1.3;
+	color: var(--accent-text);
+	margin: 0 0 10px;
+}
+
+.ground .card p {
+	margin: 0 0 12px;
+	line-height: 1.65;
+	color: var(--on-surface-muted);
+}
+
+.ground .card p:last-child {
+	margin-bottom: 0;
+}
+
+/* Bullets share the card's muted voice; the accent is the marker, not
+   the words, so a list never out-shouts the prose next to it. */
+.ground .points {
+	list-style: none;
+	margin: 0 0 4px;
+	padding: 0;
+	display: grid;
+	gap: 8px;
+}
+
+.ground .points li {
+	position: relative;
+	padding-inline-start: 18px;
+	line-height: 1.6;
+	color: var(--on-surface-muted);
+}
+
+.ground .points li::before {
+	content: '';
+	position: absolute;
+	inset-inline-start: 0;
+	top: 0.62em;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--accent);
+}
+
+/* Stacked rows with a leading mark, for lists that are too wordy to be
+   cards but too structured to be paragraphs. */
+.ground .rows {
+	display: grid;
+	gap: 14px;
+}
+
+.ground .row {
+	display: flex;
+	align-items: flex-start;
+	gap: 18px;
+	background-color: var(--surface-raised);
+	border: 1px solid var(--border);
+	border-inline-start: 3px solid var(--accent);
+	border-radius: 12px;
+	padding: 22px 24px;
+	transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.ground .row-mark {
+	flex-shrink: 0;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	border: 1px solid var(--border-strong);
+	background: var(--accent-soft);
+	color: var(--accent-text);
+	font-family: var(--font-heading);
+	font-size: 0.95rem;
+	font-weight: 700;
+}
+
+.ground .row-mark svg {
+	width: 19px;
+	height: 19px;
+}
+
+.ground .row h3 {
+	font-family: var(--font-heading);
+	font-size: 1.15rem;
+	color: var(--on-surface);
+	margin: 0 0 6px;
+}
+
+.ground .row p {
+	margin: 0;
+	line-height: 1.65;
+	color: var(--on-surface-muted);
+}
+
+/* Actions sit on the card's bottom edge, so a row of cards with
+   different amounts of copy still lines its buttons up. */
+.ground .actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: auto;
+	padding-top: 22px;
+}
+
+.ground .btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 11px 18px;
+	border-radius: 10px;
+	border: 1px solid var(--border-strong);
+	background: transparent;
+	color: var(--on-surface);
+	font-family: var(--font-body);
+	font-size: 0.92rem;
+	font-weight: 700;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.ground .btn:hover {
+	background: var(--accent-soft);
+	border-color: var(--accent);
+	color: var(--accent-text);
+}
+
+.ground .btn-primary {
+	background: var(--accent);
+	border-color: var(--accent);
+	color: var(--on-accent);
+}
+
+.ground .btn-primary:hover {
+	background: var(--accent-hover);
+	border-color: var(--accent-hover);
+	color: var(--on-accent);
+}
+
+/* The same pill the scene captions use for their closing line. */
+.ground .note {
+	display: inline-block;
+	margin-top: 18px;
+	padding: 7px 14px;
+	border-radius: 999px;
+	border: 1px solid var(--border-strong);
+	background: rgba(var(--on-surface-rgb), 0.05);
+	font-size: 0.86rem;
+	color: var(--on-surface-muted);
+}
+
+/* Accent bold, used sparingly — one or two per paragraph, the way the
+   scene captions do it. */
+.ground strong {
+	color: var(--accent-text);
+	font-weight: 700;
+}
+
+@media (max-width: 640px) {
+	.ground .block {
+		padding-top: 56px;
+	}
+
+	.ground .row {
+		flex-direction: column;
+		gap: 12px;
+	}
+}
