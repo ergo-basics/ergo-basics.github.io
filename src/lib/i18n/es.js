@@ -489,7 +489,7 @@ export default {
 			eyebrow: 'Lo que viene',
 			title: 'Investigación y prototipos, etiquetados con honestidad.',
 			intro:
-				'No todo lo de aquí abajo está en producción. Parte es un whitepaper, parte un único hilo de foro, parte un prototipo construido fuera del equipo central. Cada tarjeta dice exactamente en qué punto está.',
+				'No todo lo de aquí abajo está en producción. Parte es un whitepaper, parte un único hilo de foro, parte un prototipo sin EIP todavía. Ergo no tiene un equipo central que controle nada de esto —cualquiera puede proponer y construir. Cada tarjeta dice exactamente en qué punto está.',
 			cards: [
 				{
 					title: 'Subbloques',
@@ -517,14 +517,14 @@ export default {
 				},
 				{
 					title: 'Pruebas de reputación',
-					status: 'En producción · proyecto del ecosistema',
-					text: 'Un proyecto independiente —no un estándar central de Ergo— que representa la confianza como cajas ordinarias de Ergo: un token de reputación lleva una afirmación positiva o negativa más una delegación opcional, de modo que cada usuario construye su propio grafo de confianza en vez de depender de una puntuación global. El mismo círculo de proyectos lo reutiliza: el paradigma de ejecución de servicios distribuidos de Celaut lo usa para la confianza entre nodos y servicios, un foro completamente en cadena y un directorio de archivos basado en hashes se construyen directamente sobre él, y también las discusiones de campaña de Bene. Game of Prompts va más allá: usa pruebas de reputación y opiniones en cadena para validar a los jueces y creadores que dirigen sus competiciones de bots. En producción en la mainnet de Ergo, sin EIP y sin parámetros de staking publicados todavía.',
+					status: 'En producción · sin EIP todavía',
+					text: 'Representa la confianza como cajas ordinarias de Ergo: un token de reputación lleva una afirmación positiva o negativa más una delegación opcional, de modo que cada usuario construye su propio grafo de confianza en vez de depender de una puntuación global. Ergo no tiene un equipo de desarrollo central que decida qué se construye sobre él —cualquiera puede publicar un estándar—, y este es uno de esos estándares, reutilizado por el mismo círculo de proyectos: el paradigma de ejecución de servicios distribuidos de Celaut lo usa para la confianza entre nodos y servicios, un foro completamente en cadena y un directorio de archivos basado en hashes se construyen directamente sobre él, y también las discusiones de campaña de Bene. Game of Prompts va más allá: usa pruebas de reputación y opiniones en cadena para validar a los jueces y creadores que dirigen sus competiciones de bots. En producción en la mainnet de Ergo, sin EIP y sin parámetros de staking publicados todavía.',
 					link: 'https://docs.ergoplatform.com/eco/reputation-system/'
 				}
 			],
 			concernsTitle: 'Lee las etiquetas de estado tal cual',
 			concernsBody:
-				'Subbloques y Braid son I+D de Ergo Platform, las Políticas globales de transferencia son un debate de foro cuyo alcance va más allá de Braid hasta la mainnet de Ergo, y ChainCash y Basis siguen siendo prototipos activos —consulta la sección de Crédito mutuo más arriba para su estado completo. Las Pruebas de reputación son la excepción: un proyecto externo al ecosistema, pero en producción en la mainnet de Ergo hoy mismo. Comprueba cada fuente primaria enlazada antes de construir sobre cualquiera de ellos.'
+				'Subbloques y Braid son I+D de Ergo Platform, las Políticas globales de transferencia son un debate de foro cuyo alcance va más allá de Braid hasta la mainnet de Ergo, y ChainCash y Basis siguen siendo prototipos activos —consulta la sección de Crédito mutuo más arriba para su estado completo. Las Pruebas de reputación son la excepción: ya están en producción en la mainnet de Ergo hoy mismo, solo que todavía sin EIP ni parámetros de staking publicados. Comprueba cada fuente primaria enlazada antes de construir sobre cualquiera de ellos.'
 		},
 
 		economics: {
