@@ -3,7 +3,7 @@
 	import { browser } from '$app/environment';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { theme, applyTheme } from '$lib/theme.js';
-	import { locale, applyLocale, commitLocale, detectLocale, setLocale, stripLocalePrefix } from '$lib/i18n/index.js';
+	import { t, locale, applyLocale, commitLocale, detectLocale, setLocale, stripLocalePrefix } from '$lib/i18n/index.js';
 	import { hardResetScroll, killAllScrollTriggers } from '$lib/motion.js';
 	import AmbientBackground from '$lib/components/AmbientBackground.svelte';
 	import FloatingControls from '$lib/components/FloatingControls.svelte';
@@ -50,6 +50,32 @@
 	afterNavigate((nav) => {
 		if (nav.type !== 'popstate' && changesContent(nav)) hardResetScroll();
 	});
+
+	// Svelte never interpolates inside a literal script element in the
+	// template -- it treats its content as raw text, same as the browser
+	// does -- so the JSON has to be built here and injected as a string
+	// via @html, with the closing tag split so this source file never
+	// spells out the literal closing-script-tag sequence anywhere.
+	$: jsonLd = JSON.stringify({
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'WebSite',
+				name: 'Ergo Basics',
+				url: 'https://ergo-basics.github.io/',
+				description: $t('home.meta.description'),
+				inLanguage: ['en', 'es']
+			},
+			{
+				'@type': 'Organization',
+				name: 'Ergo Basics',
+				url: 'https://ergo-basics.github.io/',
+				logo: 'https://ergo-basics.github.io/og-image.png',
+				sameAs: ['https://github.com/ergo-basics/ergo-basics.github.io']
+			}
+		]
+	});
+	$: jsonLdTag = '<script type="application/ld+json">' + jsonLd + '<' + '/script>';
 </script>
 
 <svelte:head>
@@ -59,6 +85,9 @@
 		href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@500;700;800&family=Noto+Naskh+Arabic:wght@500;700;800&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@500;700;800&display=swap"
 		rel="stylesheet"
 	/>
+	<!-- Sitewide identity, once, for rich results — per-page facts
+	     (title/description/canonical) come from each route's SeoMeta. -->
+	{@html jsonLdTag}
 </svelte:head>
 
 <AmbientBackground />

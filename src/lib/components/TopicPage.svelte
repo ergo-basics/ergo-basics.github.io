@@ -1,5 +1,6 @@
 <script>
 	import SiteTopbar from './immersive/SiteTopbar.svelte';
+	import SeoMeta from './SeoMeta.svelte';
 	import { t, href } from '$lib/i18n/index.js';
 	/** @type {'technology'|'economics'|'applications'|'mission'} */
 	export let topic;
@@ -15,10 +16,7 @@
 	$: description = $t(`home.${keys[0]}.intro`) || $t(`home.${keys[0]}.body`);
 </script>
 
-<svelte:head>
-	<title>{title} — Ergo Basics</title>
-	<meta name="description" content={description} />
-</svelte:head>
+<SeoMeta title={`${title} — Ergo Basics`} {description} />
 <SiteTopbar {title} position="sticky" />
 <main>
 	<a class="back" href={$href('/')}>← Ergo Basics</a>
