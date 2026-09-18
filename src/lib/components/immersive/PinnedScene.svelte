@@ -430,6 +430,19 @@
 		text-align: center;
 	}
 
+	/* The desktop TOC rail (SectionIndex) is fixed at 14px from the inline
+	   start and can grow past 200px wide once its label expands (active
+	   section, or hover over the whole rail). A left-aligned scene's copy
+	   started as close as 24px in, so the rail's own panel would render on
+	   top of the caption text. Only scenes that actually sit at the start
+	   need the extra clearance — align-right/align-center already sit on
+	   the opposite side or centered. */
+	@media (min-width: 1025px) {
+		.scene:not(.align-right):not(.align-center) .scene-copy {
+			margin-inline-start: clamp(230px, 10vw, 260px);
+		}
+	}
+
 	.scene-label {
 		margin: 0 0 14px;
 		font-size: 0.78rem;

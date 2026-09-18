@@ -592,6 +592,17 @@
 		margin: auto;
 		padding: 0 24px 100px;
 	}
+
+	/* Below ~1560px the auto margins above haven't kicked in yet (the
+	   1100px max-width plus its own padding still fits the viewport), so
+	   .ground sits only 24px from the edge — right under the desktop TOC
+	   rail's reach once its active/hovered label expands past 200px wide.
+	   Wide past that point, centering alone already clears the rail. */
+	@media (min-width: 1025px) and (max-width: 1559px) {
+		.ground {
+			padding-inline-start: 230px;
+		}
+	}
 	.block {
 		padding: 110px 0 20px;
 		border-top: 1px solid var(--border);
