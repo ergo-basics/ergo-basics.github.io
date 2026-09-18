@@ -505,9 +505,9 @@ export default {
 				},
 				{
 					title: 'Políticas globales de transferencia',
-					status: 'Investigación · documento de diseño',
-					text: 'Parte del diseño de Braid: contratos de «política» a nivel de token que pueden exigir comprobaciones de lista blanca o negra, pagos obligatorios, lógica de transferencia según jurisdicción, o que la misma política se propague entre las salidas de una transacción —impuesto por el propio script del token, no por un contrato de cuenta al estilo EVM. Documentado junto con Braid; no existe EIP ni implementación todavía.',
-					link: 'https://docs.ergoplatform.com/uses/sidechains/braid/'
+					status: 'Investigación · debate de foro',
+					text: 'Contratos de «política» a nivel de token que pueden exigir comprobaciones de lista blanca o negra, pagos obligatorios, lógica de transferencia según jurisdicción, o que la misma política se propague entre las salidas de una transacción —impuesto por el propio script del token, no por un contrato de cuenta al estilo EVM. kushti la propuso en el foro de Ergo (julio de 2025) como parte del diseño de Braid, pero no es exclusiva de una sidechain: en el mismo hilo se argumenta que las mismas políticas podrían funcionar hoy directamente en la mainnet de Ergo, siendo el principal obstáculo el soporte de dapps/monederos y no el propio protocolo; kushti esbozó después una vía de soft fork para ello. No existe EIP ni implementación todavía.',
+					link: 'https://www.ergoforum.org/t/sidechain-ideas-global-transfer-policies/5199'
 				},
 				{
 					title: 'ChainCash y Basis',
@@ -524,7 +524,7 @@ export default {
 			],
 			concernsTitle: 'Lee las etiquetas de estado tal cual',
 			concernsBody:
-				'Subbloques y Braid son I+D de Ergo Platform, las Políticas globales de transferencia son un documento de diseño que vive dentro de Braid, y ChainCash y Basis siguen siendo prototipos activos —consulta la sección de Crédito mutuo más arriba para su estado completo. Las Pruebas de reputación son la excepción: un proyecto externo al ecosistema, pero en producción en la mainnet de Ergo hoy mismo. Comprueba cada fuente primaria enlazada antes de construir sobre cualquiera de ellos.'
+				'Subbloques y Braid son I+D de Ergo Platform, las Políticas globales de transferencia son un debate de foro cuyo alcance va más allá de Braid hasta la mainnet de Ergo, y ChainCash y Basis siguen siendo prototipos activos —consulta la sección de Crédito mutuo más arriba para su estado completo. Las Pruebas de reputación son la excepción: un proyecto externo al ecosistema, pero en producción en la mainnet de Ergo hoy mismo. Comprueba cada fuente primaria enlazada antes de construir sobre cualquiera de ellos.'
 		},
 
 		economics: {

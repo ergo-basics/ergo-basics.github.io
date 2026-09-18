@@ -499,9 +499,9 @@ export default {
 				},
 				{
 					title: 'Global Transfer Policies',
-					status: 'Research · design doc',
-					text: 'Part of Braid’s design: token-level "policy" contracts that can require whitelist or blacklist checks, mandatory payments, jurisdiction-specific transfer logic, or propagation of the same policy across a transaction’s outputs — enforced by the token’s own script rather than by an EVM-style account contract. Documented alongside Braid; there is no EIP and no implementation yet.',
-					link: 'https://docs.ergoplatform.com/uses/sidechains/braid/'
+					status: 'Research · forum discussion',
+					text: 'Token-level "policy" contracts that can require whitelist or blacklist checks, mandatory payments, jurisdiction-specific transfer logic, or propagation of the same policy across a transaction’s outputs — enforced by the token’s own script rather than by an EVM-style account contract. kushti proposed it on the Ergo forum (July 2025) as part of Braid’s design, but it isn’t sidechain-exclusive: in the same thread it’s argued the same policies could run directly on Ergo mainnet today, the main obstacle being dapp/wallet support rather than the protocol itself, and kushti later sketched a soft-fork path for it. No EIP and no implementation yet.',
+					link: 'https://www.ergoforum.org/t/sidechain-ideas-global-transfer-policies/5199'
 				},
 				{
 					title: 'ChainCash & Basis',
@@ -518,7 +518,7 @@ export default {
 			],
 			concernsTitle: 'Read the status pills literally',
 			concernsBody:
-				'Sub-blocks and Braid are Ergo Platform R&D, Global Transfer Policies is a design document living inside Braid, and ChainCash & Basis remain active prototypes — see the Mutual Credit section above for their full status. Reputation proofs is the outlier here: an outside ecosystem project, but live on Ergo mainnet today. Check each linked primary source before building on any of them.'
+				'Sub-blocks and Braid are Ergo Platform R&D, Global Transfer Policies is a forum discussion whose scope reaches beyond Braid to plain Ergo mainnet, and ChainCash & Basis remain active prototypes — see the Mutual Credit section above for their full status. Reputation proofs is the outlier here: an outside ecosystem project, but live on Ergo mainnet today. Check each linked primary source before building on any of them.'
 		},
 
 		economics: {
