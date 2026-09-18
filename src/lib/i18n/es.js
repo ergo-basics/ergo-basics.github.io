@@ -398,7 +398,7 @@ export default {
 				{
 					n: '02',
 					title: 'Derivados y stablecoins con confianza minimizada',
-					text: 'Valor estable e instrumentos financieros construidos como contratos sobre esa reserva, no como la promesa de una empresa. SigmaUSD, Gluon, Dexy y USE.',
+					text: 'Valor estable e instrumentos financieros construidos como contratos sobre esa reserva, no como la promesa de una empresa. SigmaUSD, Gluon, DexyGold y USE.',
 					anchor: '#stablecoins'
 				},
 				{
@@ -419,9 +419,9 @@ export default {
 
 		stablecoins: {
 			eyebrow: 'Valor estable',
-			title: 'Cuatro enfoques de la estabilidad, todos respaldados por colateral.',
+			title: 'Tres mecanismos, cuatro anclajes en producción, todos respaldados por colateral.',
 			intro:
-				'Ninguno es un peg algorítmico sin colateral del tipo que fracasó en otros sitios. Todos mantienen reservas reales y se diferencian en cómo las valoran, las dividen y las defienden.',
+				'Ninguno es un peg algorítmico sin colateral del tipo que fracasó en otros sitios. Todos mantienen reservas reales y se diferencian en cómo las valoran, las dividen y las defienden — DexyGold y USE en particular son dos anclajes construidos sobre un mismo protocolo, no dos diseños que compiten entre sí.',
 			cards: [
 				{
 					title: 'SigmaUSD',
@@ -436,15 +436,15 @@ export default {
 					link: 'https://gluon.gold/'
 				},
 				{
-					title: 'Dexy',
-					status: 'Diseño en curso',
-					text: 'Una familia de diseños asistidos por oráculos que usa <strong>señoreaje</strong> en lugar de una banda de ratio de reservas, buscando una stablecoin más simple de lo que exige AgeUSD. Un enfoque distinto de SigmaUSD y dependiente de su implementación.',
-					link: 'https://www.ergoforum.org/t/dexy-usd-simplest-stablecoin-design/1430'
+					title: 'DexyGold',
+					status: 'En producción · ligada al oro',
+					text: 'La primera implementación del protocolo <strong>Dexy</strong>: un banco algorítmico emparejado con un AMM en cadena, con precio por oráculo para que un DexyGold siga una onza troy de oro, colateralizado enteramente en ERG. En beta pública en mainnet desde julio de 2025 — el mismo marco sobre el que USE, más abajo, construye su anclaje al dólar.',
+					link: 'https://docs.ergoplatform.com/eco/dexy/'
 				},
 				{
 					title: 'USE',
 					status: 'En producción · pragmática',
-					text: 'Un activo ligado al dólar con un modelo conservador de <strong>reserva 1:1</strong>. El razonamiento es pragmático: las stablecoins de dólar centralizadas concentran la mayor parte de la liquidez en cadena y traen riesgo de censura, pero negarse a interoperar aísla a Ergo y perjudica a los usuarios corrientes. Está construida para ser barata: comisiones de puente en torno al 0,1 %, una instancia de AMM dedicada al 0,05 % en una banda estrecha y seis decimales para encajar con las principales plazas. StableMiner permite acuñarla localmente desde el monedero de un nodo, y los ejemplos de pago x402 publicados usan <strong>Babel Fees</strong>, de modo que se puede gastar USE sin tener ERG para la comisión del minero.',
+					text: 'La <strong>implementación en dólares</strong> del protocolo Dexy: el mismo diseño de banco algorítmico más AMM de DexyGold, aplicado al dólar en vez de al oro, con un modelo conservador de <strong>reserva 1:1</strong>. El razonamiento es pragmático: las stablecoins de dólar centralizadas concentran la mayor parte de la liquidez en cadena y traen riesgo de censura, pero negarse a interoperar aísla a Ergo y perjudica a los usuarios corrientes. Está construida para ser barata: comisiones de puente en torno al 0,1 %, una instancia de AMM dedicada al 0,05 % en una banda estrecha y seis decimales para encajar con las principales plazas. StableMiner permite acuñarla localmente desde el monedero de un nodo, y los ejemplos de pago x402 publicados usan <strong>Babel Fees</strong>, de modo que se puede gastar USE sin tener ERG para la comisión del minero.',
 					link: 'https://docs.ergoplatform.com/uses/use_stablecoin/'
 				}
 			],

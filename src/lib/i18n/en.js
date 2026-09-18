@@ -392,7 +392,7 @@ export default {
 				{
 					n: '02',
 					title: 'Trust-minimized derivatives and stablecoins',
-					text: 'Stable value and financial instruments built as contracts over that reserve, not as a promise from a company. SigmaUSD, Gluon, Dexy and USE.',
+					text: 'Stable value and financial instruments built as contracts over that reserve, not as a promise from a company. SigmaUSD, Gluon, DexyGold and USE.',
 					anchor: '#stablecoins'
 				},
 				{
@@ -414,9 +414,9 @@ export default {
 		/* ---------------- Stablecoins ---------------- */
 		stablecoins: {
 			eyebrow: 'Stable value',
-			title: 'Four approaches to stability, all collateral-backed.',
+			title: 'Three mechanisms, four live pegs, all collateral-backed.',
 			intro:
-				'None of these are uncollateralized algorithmic pegs of the kind that failed elsewhere. Each holds real reserves and differs in how it prices, splits and defends them.',
+				'None of these are uncollateralized algorithmic pegs of the kind that failed elsewhere. Each holds real reserves and differs in how it prices, splits and defends them — DexyGold and USE in particular are two pegs built on one shared protocol, not two competing designs.',
 			cards: [
 				{
 					title: 'SigmaUSD',
@@ -431,15 +431,15 @@ export default {
 					link: 'https://gluon.gold/'
 				},
 				{
-					title: 'Dexy',
-					status: 'Design in progress',
-					text: 'An oracle-assisted family of designs using <strong>seigniorage</strong> rather than a reserve-ratio band, aiming at a simpler stablecoin than AgeUSD requires. A distinct approach from SigmaUSD, and specific to its implementation.',
-					link: 'https://www.ergoforum.org/t/dexy-usd-simplest-stablecoin-design/1430'
+					title: 'DexyGold',
+					status: 'Live · gold-pegged',
+					text: 'The first implementation of the <strong>Dexy</strong> protocol: an algorithmic bank paired with an on-chain AMM, oracle-priced so one DexyGold tracks one troy ounce of gold, collateralized entirely in ERG. Public mainnet beta since July 2025 — the same framework USE below builds its USD peg on.',
+					link: 'https://docs.ergoplatform.com/eco/dexy/'
 				},
 				{
 					title: 'USE',
 					status: 'Live · pragmatic',
-					text: 'A USD-pegged asset on a conservative <strong>1:1 reserve model</strong>. The reasoning is pragmatic: centralized dollar stablecoins anchor most on-chain liquidity and carry censorship risk, but refusing to interoperate isolates Ergo and costs ordinary users. Built for cost efficiency — bridge fees targeted near 0.1%, a dedicated AMM instance at 0.05% within a tight band, six decimals to match major venues. StableMiner mints it locally from a node wallet, and published x402 payment examples use <strong>Babel fees</strong>, so a payer can spend USE without holding ERG for the miner fee.',
+					text: 'The Dexy protocol’s <strong>USD-pegged implementation</strong> — DexyGold’s algorithmic-bank-and-AMM design, applied to the dollar instead of gold, on a conservative <strong>1:1 reserve model</strong>. The reasoning is pragmatic: centralized dollar stablecoins anchor most on-chain liquidity and carry censorship risk, but refusing to interoperate isolates Ergo and costs ordinary users. Built for cost efficiency — bridge fees targeted near 0.1%, a dedicated AMM instance at 0.05% within a tight band, six decimals to match major venues. StableMiner mints it locally from a node wallet, and published x402 payment examples use <strong>Babel fees</strong>, so a payer can spend USE without holding ERG for the miner fee.',
 					link: 'https://docs.ergoplatform.com/uses/use_stablecoin/'
 				}
 			],
