@@ -510,15 +510,21 @@ export default {
 					link: 'https://docs.ergoplatform.com/uses/sidechains/braid/'
 				},
 				{
+					title: 'ChainCash y Basis',
+					status: 'Investigación · prototipo',
+					text: 'De BetterMoneyLabs —el mismo equipo que construye Braid—: ChainCash permite que cualquiera emita un pagaré firmado por quien lo gasta y que acumula respaldo a medida que circula, y Basis liquida el estado de deuda mutua resultante fuera de cadena, comprometiendo solo un resumen en Ergo. Consulta la sección de Crédito mutuo más arriba para el cuadro completo; los contratos y las API todavía cambian con frecuencia, y algunas rutas de transferencia necesitan firmas Schnorr en crudo, así que el soporte normal de monedero sigue siendo limitado.',
+					link: 'https://docs.ergoplatform.com/uses/chaincash/'
+				},
+				{
 					title: 'Pruebas de reputación',
-					status: 'Prototipo del ecosistema',
-					text: 'Un proyecto independiente —no un estándar central de Ergo— que representa la confianza como cajas ordinarias de Ergo: un token de reputación lleva una afirmación positiva o negativa más una delegación opcional, de modo que cada usuario construye su propio grafo de confianza en vez de depender de una puntuación global. El mismo círculo de proyectos lo reutiliza: el paradigma de ejecución de servicios distribuidos de Celaut lo usa para la confianza entre nodos y servicios, un foro completamente en cadena y un directorio de archivos basado en hashes se construyen directamente sobre él, y también las discusiones de campaña de Bene. Game of Prompts va más allá: usa pruebas de reputación y opiniones en cadena para validar a los jueces y creadores que dirigen sus competiciones de bots. Existe como panel web y librería de backend en funcionamiento, sin EIP y sin parámetros de staking publicados todavía.',
+					status: 'En producción · proyecto del ecosistema',
+					text: 'Un proyecto independiente —no un estándar central de Ergo— que representa la confianza como cajas ordinarias de Ergo: un token de reputación lleva una afirmación positiva o negativa más una delegación opcional, de modo que cada usuario construye su propio grafo de confianza en vez de depender de una puntuación global. El mismo círculo de proyectos lo reutiliza: el paradigma de ejecución de servicios distribuidos de Celaut lo usa para la confianza entre nodos y servicios, un foro completamente en cadena y un directorio de archivos basado en hashes se construyen directamente sobre él, y también las discusiones de campaña de Bene. Game of Prompts va más allá: usa pruebas de reputación y opiniones en cadena para validar a los jueces y creadores que dirigen sus competiciones de bots. En producción en la mainnet de Ergo, sin EIP y sin parámetros de staking publicados todavía.',
 					link: 'https://docs.ergoplatform.com/eco/reputation-system/'
 				}
 			],
 			concernsTitle: 'Lee las etiquetas de estado tal cual',
 			concernsBody:
-				'Subbloques y Braid son I+D de Ergo Platform; las Políticas globales de transferencia son un único post de foro; las Pruebas de reputación son un proyecto externo del ecosistema. Ninguno de los cuatro corre hoy en mainnet: comprueba la fuente primaria enlazada antes de construir sobre cualquiera de ellos.'
+				'Subbloques y Braid son I+D de Ergo Platform, las Políticas globales de transferencia son un documento de diseño que vive dentro de Braid, y ChainCash y Basis siguen siendo prototipos activos —consulta la sección de Crédito mutuo más arriba para su estado completo. Las Pruebas de reputación son la excepción: un proyecto externo al ecosistema, pero en producción en la mainnet de Ergo hoy mismo. Comprueba cada fuente primaria enlazada antes de construir sobre cualquiera de ellos.'
 		},
 
 		economics: {

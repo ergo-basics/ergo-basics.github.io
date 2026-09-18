@@ -504,15 +504,21 @@ export default {
 					link: 'https://docs.ergoplatform.com/uses/sidechains/braid/'
 				},
 				{
+					title: 'ChainCash & Basis',
+					status: 'Research · prototype',
+					text: 'From BetterMoneyLabs — the same team building Braid: ChainCash lets anyone issue a spender-signed IOU note that gathers backing as it circulates, and Basis settles the resulting mutual-debt state off-chain, committing only a digest on Ergo. See the Mutual Credit section above for the full picture; contracts and APIs still change often, and some transfer paths need raw Schnorr signatures, so normal wallet support stays limited.',
+					link: 'https://docs.ergoplatform.com/uses/chaincash/'
+				},
+				{
 					title: 'Reputation proofs',
-					status: 'Ecosystem prototype',
-					text: 'An independent project — not a core Ergo standard — that represents trust as ordinary Ergo boxes: a reputation token carries a positive or negative claim plus optional delegation, so each user builds their own trust graph instead of relying on one global score. The same circle of projects reuses it: Celaut’s distributed service-execution paradigm uses it for node and service trust, a fully on-chain forum and a hash-based file-discovery directory build directly on it, and so do Bene’s own campaign discussions. Game of Prompts goes further still, using reputation proofs and on-chain opinions to vet the judges and creators running its bot competitions. Exists as a working web panel and backend library, with no EIP and no published staking parameters yet.',
+					status: 'Live · ecosystem project',
+					text: 'An independent project — not a core Ergo standard — that represents trust as ordinary Ergo boxes: a reputation token carries a positive or negative claim plus optional delegation, so each user builds their own trust graph instead of relying on one global score. The same circle of projects reuses it: Celaut’s distributed service-execution paradigm uses it for node and service trust, a fully on-chain forum and a hash-based file-discovery directory build directly on it, and so do Bene’s own campaign discussions. Game of Prompts goes further still, using reputation proofs and on-chain opinions to vet the judges and creators running its bot competitions. Live on Ergo mainnet, with no EIP and no published staking parameters yet.',
 					link: 'https://docs.ergoplatform.com/eco/reputation-system/'
 				}
 			],
 			concernsTitle: 'Read the status pills literally',
 			concernsBody:
-				'Sub-blocks and Braid are Ergo Platform R&D; Global Transfer Policies is a single forum post; Reputation proofs is an outside ecosystem project. None of the four ships on mainnet today — check the linked primary source before building on any of them.'
+				'Sub-blocks and Braid are Ergo Platform R&D, Global Transfer Policies is a design document living inside Braid, and ChainCash & Basis remain active prototypes — see the Mutual Credit section above for their full status. Reputation proofs is the outlier here: an outside ecosystem project, but live on Ergo mainnet today. Check each linked primary source before building on any of them.'
 		},
 
 		economics: {
