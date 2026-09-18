@@ -73,6 +73,7 @@ export default {
 				stablecoins: 'Stablecoins',
 				credit: 'Crédito mutuo',
 				vision: 'Mercados p2p',
+				frontier: 'Investigación de frontera',
 				economics: 'Economía',
 				applications: 'Aplicaciones',
 				community: 'Ideas',
@@ -483,6 +484,43 @@ export default {
 			]
 		},
 
+		/* ---------------- Investigación de frontera ---------------- */
+		frontier: {
+			eyebrow: 'Lo que viene',
+			title: 'Investigación y prototipos, etiquetados con honestidad.',
+			intro:
+				'No todo lo de aquí abajo está en producción. Parte es un whitepaper, parte un único hilo de foro, parte un prototipo construido fuera del equipo central. Cada tarjeta dice exactamente en qué punto está.',
+			cards: [
+				{
+					title: 'Subbloques',
+					status: 'Investigación · devnet',
+					text: 'Los bloques de ordenación llegan cada 2 minutos aproximadamente, dejando ancho de banda ocioso entre medias y una varianza alta en el tiempo de confirmación. Los subbloques —«input blocks» más pequeños, producidos aproximadamente una vez por segundo— transportan las transacciones de forma continua, así que una transacción puede notarse en segundos aunque el bloque de ordenación tarde en finalizarla. Los primeros diseños usaron proporciones distintas (una entrada de blog de 2023 ilustraba unos 128 input blocks por bloque de ordenación; las pruebas de devnet de 2025 rondaron los 60), y la rama de desarrollo Matrix hizo que esa proporción se pueda ajustar por voto de los mineros en lugar de ser una constante fija. La propia hoja de ruta de Ergo lo califica de investigación y desarrollo activo en devnet, no de función de mainnet.',
+					link: 'https://docs.ergoplatform.com/uses/sidechains/subblocks/'
+				},
+				{
+					title: 'Braid',
+					status: 'Investigación · whitepaper',
+					text: 'Una sidechain minada a la vez con Bitcoin y con Ergo («double merge-mining»), construida por BetterMoneyLabs —el equipo detrás de ChainCash y Basis— para dar a una cadena centrada en stablecoins y activos del mundo real la seguridad Proof-of-Work de Bitcoin desde el primer día, junto con los contratos Sigma de Ergo. Su diseño también esboza «dark tokens» que ocultarían los importes mediante compromisos homomórficos y un manejo del receptor similar al de las direcciones sigilosas —privacidad que por ahora solo existe sobre el papel. La página de ecosistema de Ergo la lista como «en progreso». El repositorio público es poco más que un esqueleto vacío y la sección de tokenomics del propio whitepaper está marcada como sin terminar; no existe testnet.',
+					link: 'https://github.com/BetterMoneyLabs/braid'
+				},
+				{
+					title: 'Políticas globales de transferencia',
+					status: 'Investigación · documento de diseño',
+					text: 'Parte del diseño de Braid: contratos de «política» a nivel de token que pueden exigir comprobaciones de lista blanca o negra, pagos obligatorios, lógica de transferencia según jurisdicción, o que la misma política se propague entre las salidas de una transacción —impuesto por el propio script del token, no por un contrato de cuenta al estilo EVM. Documentado junto con Braid; no existe EIP ni implementación todavía.',
+					link: 'https://docs.ergoplatform.com/uses/sidechains/braid/'
+				},
+				{
+					title: 'Pruebas de reputación',
+					status: 'Prototipo del ecosistema',
+					text: 'Un proyecto independiente —no un estándar central de Ergo— que representa la confianza como cajas ordinarias de Ergo: un token de reputación lleva una afirmación positiva o negativa más una delegación opcional, de modo que cada usuario construye su propio grafo de confianza en vez de depender de una puntuación global. Sostiene una pequeña familia de herramientas del mismo equipo que reutilizan este protocolo en vez de inventar el suyo propio: un foro completamente en cadena, un directorio de descubrimiento de archivos basado en hashes, y las propias discusiones de campaña de Bene corren sobre él. Existe como panel web y librería de backend en funcionamiento, sin EIP y sin parámetros de staking publicados todavía.',
+					link: 'https://docs.ergoplatform.com/eco/reputation-system/'
+				}
+			],
+			concernsTitle: 'Lee las etiquetas de estado tal cual',
+			concernsBody:
+				'Subbloques y Braid son I+D de Ergo Platform; las Políticas globales de transferencia son un único post de foro; las Pruebas de reputación son un proyecto externo del ecosistema. Ninguno de los cuatro corre hoy en mainnet: comprueba la fuente primaria enlazada antes de construir sobre cualquiera de ellos.'
+		},
+
 		economics: {
 			eyebrow: 'Economía',
 			title: 'Una oferta conocida, distribuida mediante minería.',
@@ -514,9 +552,19 @@ export default {
 					link: 'https://rosen.tech/'
 				},
 				{
-					title: 'Spectrum',
-					text: 'Exchange no custodial basado en contratos eUTXO, con mercados AMM y trabajo de libro de órdenes en el ecosistema.',
-					link: 'https://spectrum.fi/'
+					title: 'ErgoDex',
+					text: 'El exchange descentralizado original de Ergo, activo desde 2021: contratos de código abierto de libro de órdenes y AMM sobre los que se construyen la mayoría de los demás exchanges del ecosistema, en lugar de que cada uno implemente su propio motor de emparejamiento. Machina Finance es la excepción del ecosistema: usa su propio emparejamiento de órdenes grid y límite fuera de cadena en vez de apoyarse en los pools compartidos de ErgoDex.',
+					link: 'https://ergoplatform.org/en/ecosystem/'
+				},
+				{
+					title: 'Machina Finance',
+					text: 'Exchange entre pares de órdenes grid y límite: quien opera fija un rango de precio, un bot fuera de cadena dispara la ejecución y un contrato en cadena la verifica y liquida, sin pool de liquidez compartido para quienes ponen las órdenes. Aún sin lanzar: la primera versión del SDK es una alpha de mayo de 2026, no hay app pública ni despliegue en mainnet, y no se han publicado cifras de comisiones.',
+					link: 'https://ergoplatform.org/en/blog/Machina-Finance-Off-Chain-Execution-On-Chain-Trust/'
+				},
+				{
+					title: 'Bene',
+					text: 'dApp de financiación colectiva de Stability Nexus basada en custodia, no en confianza: quien aporta recibe un token provisional y solo obtiene el token real del proyecto si la campaña alcanza su objetivo antes del plazo; si no, el mismo contrato devuelve todo el dinero. Funciona enteramente del lado del cliente, con una comisión del 5 % que solo se cobra si la campaña tiene éxito.',
+					link: 'https://ergo.bene.stability.nexus/'
 				},
 				{
 					title: 'ErgoMixer / SigmaJoin',
@@ -599,7 +647,9 @@ export default {
 				{ label: 'Alquiler de almacenamiento', href: 'https://docs.ergoplatform.com/mining/rent/' },
 				{ label: 'Stablecoins', href: 'https://docs.ergoplatform.com/uses/stablecoins/' },
 				{ label: 'ChainCash', href: 'https://docs.ergoplatform.com/uses/chaincash/' },
-				{ label: 'ErgoForum', href: 'https://www.ergoforum.org/top' }
+				{ label: 'ErgoForum', href: 'https://www.ergoforum.org/top' },
+				{ label: 'Hoja de ruta de Ergo (subbloques, estado del EIP-50)', href: 'https://docs.ergoplatform.com/roadmap/' },
+				{ label: 'Catálogo del ecosistema Ergo', href: 'https://ergoplatform.org/en/ecosystem/' }
 			]
 		}
 	}

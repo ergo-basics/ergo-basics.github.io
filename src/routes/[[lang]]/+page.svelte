@@ -381,6 +381,26 @@
 			</div>
 		</section>
 
+		<!-- ===================== Frontier research ===================== -->
+		<section class="block" id="frontier">
+			<p class="eyebrow">{$t('home.frontier.eyebrow')}</p>
+			<h2>{$t('home.frontier.title')}</h2>
+			<p class="intro">{$t('home.frontier.intro')}</p>
+			<div class="grid grid-2 apps">
+				{#each $t('home.frontier.cards') as card}
+					<a class="card" href={card.link} target="_blank" rel="noopener noreferrer">
+						<h3>{card.title} <small>↗</small></h3>
+						<span class="status">{card.status}</span>
+						<p>{@html card.text}</p>
+					</a>
+				{/each}
+			</div>
+			<article class="note-card wide">
+				<h3>{$t('home.frontier.concernsTitle')}</h3>
+				<p>{@html $t('home.frontier.concernsBody')}</p>
+			</article>
+		</section>
+
 		<section class="block" id="economics">
 			<p class="eyebrow">{$t('home.economics.eyebrow')}</p>
 			<h2>{$t('home.economics.title')}</h2>

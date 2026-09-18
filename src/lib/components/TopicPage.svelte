@@ -5,8 +5,8 @@
 	export let topic;
 	/** @type {Record<string, string[]>} */
 	const map = {
-		technology: ['foundations', 'boxes', 'proofs', 'sustainability'],
-		economics: ['economics', 'sustainability'],
+		technology: ['foundations', 'boxes', 'proofs', 'frontier'],
+		economics: ['economics'],
 		applications: ['applications'],
 		mission: ['mission', 'sources']
 	};

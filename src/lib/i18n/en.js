@@ -70,6 +70,7 @@ export default {
 				stablecoins: 'Stablecoins',
 				credit: 'Mutual Credit',
 				vision: 'p2p Markets',
+				frontier: 'Frontier Research',
 				economics: 'Economics',
 				applications: 'Applications',
 				community: 'Ideas',
@@ -477,6 +478,43 @@ export default {
 			]
 		},
 
+		/* ---------------- Frontier research ---------------- */
+		frontier: {
+			eyebrow: 'What comes next',
+			title: 'Research and prototypes, honestly labelled.',
+			intro:
+				'Not everything below runs in production. Some of this is a whitepaper, some a single forum thread, some a prototype built outside the core team. Each card says exactly where it stands.',
+			cards: [
+				{
+					title: 'Sub-blocks',
+					status: 'Research · devnet',
+					text: 'Ordering blocks land roughly every 2 minutes, leaving bandwidth idle in between and wide variance in confirmation time. Sub-blocks — smaller "input blocks" produced roughly once a second — carry transaction data continuously, so a transaction can be felt within seconds while the ordering block still finalizes it. Early write-ups used different ratios (a 2023 blog post illustrated around 128 input blocks per ordering block; 2025 devnet testing ran closer to 60), and the Matrix development branch made that ratio adjustable by miner vote instead of a hardcoded constant. Ergo’s own roadmap calls this active research and development on a devnet, not a mainnet feature.',
+					link: 'https://docs.ergoplatform.com/uses/sidechains/subblocks/'
+				},
+				{
+					title: 'Braid',
+					status: 'Research · whitepaper',
+					text: 'A sidechain double merge-mined with Bitcoin and Ergo at once, built by BetterMoneyLabs — the team behind ChainCash and Basis — to give a stablecoin- and RWA-focused chain Bitcoin-grade Proof-of-Work security from day one, alongside Ergo’s Sigma contracts. Its design also sketches "dark tokens" that would hide amounts behind homomorphic commitments with stealth-address-like receiver handling — privacy work that exists on paper only so far. Ergo’s ecosystem page lists it “in progress.” The public repository is close to an empty skeleton and the whitepaper’s own tokenomics section is marked unfinished; there is no testnet.',
+					link: 'https://github.com/BetterMoneyLabs/braid'
+				},
+				{
+					title: 'Global Transfer Policies',
+					status: 'Research · design doc',
+					text: 'Part of Braid’s design: token-level "policy" contracts that can require whitelist or blacklist checks, mandatory payments, jurisdiction-specific transfer logic, or propagation of the same policy across a transaction’s outputs — enforced by the token’s own script rather than by an EVM-style account contract. Documented alongside Braid; there is no EIP and no implementation yet.',
+					link: 'https://docs.ergoplatform.com/uses/sidechains/braid/'
+				},
+				{
+					title: 'Reputation proofs',
+					status: 'Ecosystem prototype',
+					text: 'An independent project — not a core Ergo standard — that represents trust as ordinary Ergo boxes: a reputation token carries a positive or negative claim plus optional delegation, so each user builds their own trust graph instead of relying on one global score. It underpins a small family of tools from the same team that reuse this protocol instead of inventing their own: a fully on-chain forum, a hash-based file-discovery directory, and Bene’s own campaign discussions all run on it. Exists as a working web panel and backend library, with no EIP and no published staking parameters yet.',
+					link: 'https://docs.ergoplatform.com/eco/reputation-system/'
+				}
+			],
+			concernsTitle: 'Read the status pills literally',
+			concernsBody:
+				'Sub-blocks and Braid are Ergo Platform R&D; Global Transfer Policies is a single forum post; Reputation proofs is an outside ecosystem project. None of the four ships on mainnet today — check the linked primary source before building on any of them.'
+		},
+
 		economics: {
 			eyebrow: 'Economics',
 			title: 'A known supply, distributed through mining.',
@@ -508,9 +546,19 @@ export default {
 					link: 'https://rosen.tech/'
 				},
 				{
-					title: 'Spectrum',
-					text: 'A non-custodial exchange built around eUTXO contracts, with AMM and order-book work across the ecosystem.',
-					link: 'https://spectrum.fi/'
+					title: 'ErgoDex',
+					text: 'Ergo’s original decentralized exchange, live since 2021: open-source order-book and AMM contracts that most of the ecosystem’s other exchanges build around rather than each shipping a separate matching engine. Machina Finance is the ecosystem’s exception — it runs its own off-chain grid- and limit-order matching instead of routing through ErgoDex’s shared pools.',
+					link: 'https://ergoplatform.org/en/ecosystem/'
+				},
+				{
+					title: 'Machina Finance',
+					text: 'A peer-to-peer grid- and limit-order exchange: a trader sets a price range, an off-chain bot triggers the fill, and an on-chain contract verifies and settles it, with no shared liquidity pool for makers to sit in. Pre-launch: the SDK’s first release is a May 2026 alpha, there is no public app or mainnet deployment, and no fee figures are published yet.',
+					link: 'https://ergoplatform.org/en/blog/Machina-Finance-Off-Chain-Execution-On-Chain-Trust/'
+				},
+				{
+					title: 'Bene',
+					text: 'A Stability Nexus crowdfunding dApp built on escrow rather than trust: contributors receive a placeholder token, and only receive the project’s real token if the campaign clears its funding goal by the deadline — otherwise the same contract refunds everyone in full. Fully client-side, with a 5% fee charged only on successful campaigns.',
+					link: 'https://ergo.bene.stability.nexus/'
 				},
 				{
 					title: 'ErgoMixer / SigmaJoin',
@@ -590,7 +638,9 @@ export default {
 				{ label: 'Storage rent', href: 'https://docs.ergoplatform.com/mining/rent/' },
 				{ label: 'Stablecoins', href: 'https://docs.ergoplatform.com/uses/stablecoins/' },
 				{ label: 'ChainCash', href: 'https://docs.ergoplatform.com/uses/chaincash/' },
-				{ label: 'ErgoForum', href: 'https://www.ergoforum.org/top' }
+				{ label: 'ErgoForum', href: 'https://www.ergoforum.org/top' },
+				{ label: 'Ergo roadmap (sub-blocks, EIP-50 status)', href: 'https://docs.ergoplatform.com/roadmap/' },
+				{ label: 'Ergo ecosystem catalogue', href: 'https://ergoplatform.org/en/ecosystem/' }
 			]
 		}
 	}
