@@ -506,7 +506,7 @@ export default {
 				{
 					title: 'Reputation proofs',
 					status: 'Ecosystem prototype',
-					text: 'An independent project — not a core Ergo standard — that represents trust as ordinary Ergo boxes: a reputation token carries a positive or negative claim plus optional delegation, so each user builds their own trust graph instead of relying on one global score. The same circle of projects reuses it: Celaut’s distributed service-execution paradigm uses it for node and service trust, a fully on-chain forum and a hash-based file-discovery directory build directly on it, and so do Bene’s own campaign discussions. Game of Prompts documents it as a proposed — not yet built — way to rate game creators. Exists as a working web panel and backend library, with no EIP and no published staking parameters yet.',
+					text: 'An independent project — not a core Ergo standard — that represents trust as ordinary Ergo boxes: a reputation token carries a positive or negative claim plus optional delegation, so each user builds their own trust graph instead of relying on one global score. The same circle of projects reuses it: Celaut’s distributed service-execution paradigm uses it for node and service trust, a fully on-chain forum and a hash-based file-discovery directory build directly on it, and so do Bene’s own campaign discussions. Game of Prompts goes further still, using reputation proofs and on-chain opinions to vet the judges and creators running its bot competitions. Exists as a working web panel and backend library, with no EIP and no published staking parameters yet.',
 					link: 'https://docs.ergoplatform.com/eco/reputation-system/'
 				}
 			],
