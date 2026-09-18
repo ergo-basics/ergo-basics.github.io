@@ -167,6 +167,57 @@ export default {
 						p: 'Se pueden añadir reservas en cadena para <strong>reducir</strong> la confianza necesaria donde esta se agota. Se empieza por las personas y se recurre a la blockchain solo cuando hace falta.'
 					}
 				]
+			},
+			pillars: {
+				label: 'Cuatro pilares',
+				beats: [
+					{
+						h: 'Cuatro apoyos, no uno.',
+						p: 'El dinero independiente del Estado necesita un libro contable neutral, valor estable sobre él, una forma de entrar y salir, y dinero que las personas se crean entre sí — cada pieza con <strong>confianza minimizada</strong> por sí sola.'
+					},
+					{
+						h: 'Cada uno se sostiene solo.',
+						p: 'Ningún pilar depende de que los demás funcionen. Que uno falle no derriba al resto — eso es justamente lo que compra la confianza minimizada.'
+					},
+					{
+						h: 'Juntos, por primera vez.',
+						p: 'La afirmación de kushti es que Ergo tiene ahora <strong>los cuatro a la vez</strong> — el primer ecosistema donde eso ha sido cierto.'
+					}
+				]
+			},
+			stablecoins: {
+				label: 'Valor estable',
+				beats: [
+					{
+						h: 'Una reserva lo respalda todo.',
+						p: 'Cada diseño aquí mantiene <strong>reservas reales en ERG</strong>, no un ancla algorítmica sin colateral.'
+					},
+					{
+						h: 'Dividido en una parte estable y otra volátil.',
+						p: 'Un lado queda aislado de los vaivenes; el otro <strong>absorbe la volatilidad</strong> a cambio de la ganancia potencial.'
+					},
+					{
+						h: 'La proporción es lo único que importa.',
+						p: 'Si la reserva se estira demasiado, el lado volátil toca su límite primero — el lado estable está protegido por diseño, no por promesa.'
+					}
+				]
+			},
+			applications: {
+				label: 'Oráculos y puentes',
+				beats: [
+					{
+						h: 'Muchos publican, una caja lo guarda.',
+						p: 'Los participantes del oráculo publican de forma independiente; el agregado llega a una única <strong>caja en cadena</strong>.'
+					},
+					{
+						h: 'Se lee, nunca se consume.',
+						p: 'Cualquier número de contratos puede referenciar esa misma caja en el mismo bloque — nadie tiene que ganar una carrera para usarla.'
+					},
+					{
+						h: 'La misma postura, cruzando cadenas.',
+						p: 'Rosen Bridge mueve valor entre cadenas con <strong>watchers y guards</strong> coordinando, con Ergo como ancla debajo.'
+					}
+				]
 			}
 		},
 
@@ -363,7 +414,7 @@ export default {
 					anchor: '#credit'
 				}
 			],
-			note: 'Se presenta como la tesis de kushti sobre el ecosistema, no como un hecho neutral del protocolo. Los pilares segundo y cuarto en particular contienen sistemas con grados de madurez muy distintos: consulta el estado en cada sección.'
+			note: 'Los pilares segundo y cuarto en particular contienen sistemas con grados de madurez muy distintos: consulta el estado en cada sección.'
 		},
 
 		stablecoins: {
@@ -456,7 +507,7 @@ export default {
 				{
 					n: '01',
 					title: 'Producción descentralizada de bloques',
-					text: 'La prueba de trabajo ya es un mercado entre pares: cualquiera puede generar un bloque. Ergo se lanzó con no-externalización débil para evitar la formación de pools; tuvo inconvenientes y los pools aparecieron igualmente. Ahora Lithos aborda el mismo objetivo mediante pruebas de participación y contratos de colateral, con nuevos mercados formándose alrededor de la propia minería. En testnet.'
+					text: 'La prueba de trabajo ya es un mercado entre pares: cualquiera puede generar un bloque, sin registro al que unirse ni operador al que presionar (ver Prueba de trabajo más arriba). Lithos extiende ese mercado a la propia minería en vez de sustituirlo.'
 				},
 				{
 					n: '02',
@@ -466,7 +517,7 @@ export default {
 				{
 					n: '03',
 					title: 'Crédito mutuo entre pares',
-					text: 'Basis: crédito creado sobre la confianza entre personas que no necesitan saber nada de Ergo ni de blockchains, usando activos en cadena solo para reducir esa confianza. La expresión más directa de la tesis.'
+					text: 'Basis (ver Crédito mutuo más arriba) es la expresión más directa de la tesis: crédito creado entre personas, usando la cadena solo para reforzar la confianza donde se agota, nunca para otorgar permiso.'
 				}
 			],
 			supportTitle: 'Qué hace que todo funcione mejor',
@@ -518,7 +569,7 @@ export default {
 				{
 					title: 'Pruebas de reputación',
 					status: 'En producción · sin EIP todavía',
-					text: 'Representa la confianza como cajas ordinarias de Ergo: un token de reputación lleva una afirmación positiva o negativa más una delegación opcional, de modo que cada usuario construye su propio grafo de confianza en vez de depender de una puntuación global. Ergo no tiene un equipo de desarrollo central que decida qué se construye sobre él —cualquiera puede publicar un estándar—, y este es uno de esos estándares, reutilizado por el mismo círculo de proyectos: el paradigma de ejecución de servicios distribuidos de Celaut lo usa para la confianza entre nodos y servicios, un foro completamente en cadena y un directorio de archivos basado en hashes se construyen directamente sobre él, y también las discusiones de campaña de Bene. Game of Prompts va más allá: usa pruebas de reputación y opiniones en cadena para validar a los jueces y creadores que dirigen sus competiciones de bots. En producción en la mainnet de Ergo, sin EIP y sin parámetros de staking publicados todavía.',
+					text: 'Representa la confianza como cajas ordinarias de Ergo: un token de reputación lleva una afirmación positiva o negativa más una delegación opcional, de modo que cada usuario construye su propio grafo de confianza en vez de depender de una puntuación global. Reutilizado por el mismo círculo de proyectos: el paradigma de ejecución de servicios distribuidos de Celaut lo usa para la confianza entre nodos y servicios, un foro completamente en cadena y un directorio de archivos basado en hashes se construyen directamente sobre él, y también las discusiones de campaña de Bene. Game of Prompts va más allá: usa pruebas de reputación y opiniones en cadena para validar a los jueces y creadores que dirigen sus competiciones de bots. En producción en la mainnet de Ergo, sin EIP y sin parámetros de staking publicados todavía.',
 					link: 'https://docs.ergoplatform.com/eco/reputation-system/'
 				}
 			],

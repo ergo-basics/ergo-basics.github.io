@@ -15,6 +15,7 @@
 	 */
 	import { onMount } from 'svelte';
 	import { t, href } from '$lib/i18n/index.js';
+	import SeoMeta from '$lib/components/SeoMeta.svelte';
 	import SectionIndex from '$lib/components/SectionIndex.svelte';
 	import GoToTop from '$lib/components/GoToTop.svelte';
 	import PinnedScene from '$lib/components/immersive/PinnedScene.svelte';
@@ -32,14 +33,7 @@
 	onMount(() => startSmoothScroll());
 </script>
 
-<svelte:head>
-	<title>{$t('home.meta.title')}</title>
-	<meta name="description" content={$t('home.meta.description')} />
-	<meta name="theme-color" content="#171717" />
-	<meta property="og:title" content={$t('home.meta.title')} />
-	<meta property="og:description" content={$t('home.meta.description')} />
-	<meta property="og:type" content="website" />
-</svelte:head>
+<SeoMeta title={$t('home.meta.title')} description={$t('home.meta.description')} />
 
 <SectionIndex {sections} />
 
@@ -68,7 +62,7 @@
 		draw={scene.boxes.draw}
 		scrollLength={scene.boxes.scrollLength}
 		let:progress
-		let:isStatic
+		let:static={isStatic}
 	>
 		<div class="beats">
 			{#each $t('home.scenes.boxes.beats') as beat, i}
@@ -94,7 +88,7 @@
 		draw={scene.sigma.draw}
 		scrollLength={scene.sigma.scrollLength}
 		let:progress
-		let:isStatic
+		let:static={isStatic}
 	>
 		<div class="beats">
 			{#each $t('home.scenes.sigma.beats') as beat, i}
@@ -164,7 +158,7 @@
 		draw={scene.pow.draw}
 		scrollLength={scene.pow.scrollLength}
 		let:progress
-		let:isStatic
+		let:static={isStatic}
 	>
 		<div class="beats">
 			{#each $t('home.scenes.pow.beats') as beat, i}
@@ -213,7 +207,7 @@
 		draw={scene.rent.draw}
 		scrollLength={scene.rent.scrollLength}
 		let:progress
-		let:isStatic
+		let:static={isStatic}
 	>
 		<div class="beats">
 			{#each $t('home.scenes.rent.beats') as beat, i}
@@ -255,9 +249,37 @@
 				{/each}
 			</div>
 		</section>
+	</div>
 
+	<!-- ===================== SCENE: four pillars ===================== -->
+	<PinnedScene
+		id="pillars"
+		label={$t('home.scenes.pillars.label')}
+		align={scene.pillars.align}
+		draw={scene.pillars.draw}
+		scrollLength={scene.pillars.scrollLength}
+		let:progress
+		let:static={isStatic}
+	>
+		<div class="beats">
+			{#each $t('home.scenes.pillars.beats') as beat, i}
+				<SceneBeat
+					{progress}
+					{isStatic}
+					from={scene.pillars.beats[i].from}
+					to={scene.pillars.beats[i].to}
+					hold={scene.pillars.beats[i].hold}
+				>
+					<h2>{beat.h}</h2>
+					<p>{@html beat.p}</p>
+				</SceneBeat>
+			{/each}
+		</div>
+	</PinnedScene>
+
+	<div class="ground">
 		<!-- ===================== Four pillars ===================== -->
-		<section class="block pillars" id="pillars">
+		<section class="block pillars">
 			<p class="eyebrow">{$t('home.pillars.eyebrow')}</p>
 			<h2>{$t('home.pillars.title')}</h2>
 			<p class="intro">{$t('home.pillars.intro')}</p>
@@ -271,9 +293,37 @@
 			</div>
 			<p class="caveat">{$t('home.pillars.note')}</p>
 		</section>
+	</div>
 
+	<!-- ===================== SCENE: stablecoins ===================== -->
+	<PinnedScene
+		id="stablecoins"
+		label={$t('home.scenes.stablecoins.label')}
+		align={scene.stablecoins.align}
+		draw={scene.stablecoins.draw}
+		scrollLength={scene.stablecoins.scrollLength}
+		let:progress
+		let:static={isStatic}
+	>
+		<div class="beats">
+			{#each $t('home.scenes.stablecoins.beats') as beat, i}
+				<SceneBeat
+					{progress}
+					{isStatic}
+					from={scene.stablecoins.beats[i].from}
+					to={scene.stablecoins.beats[i].to}
+					hold={scene.stablecoins.beats[i].hold}
+				>
+					<h2>{beat.h}</h2>
+					<p>{@html beat.p}</p>
+				</SceneBeat>
+			{/each}
+		</div>
+	</PinnedScene>
+
+	<div class="ground">
 		<!-- ===================== Stablecoins ===================== -->
-		<section class="block" id="stablecoins">
+		<section class="block">
 			<p class="eyebrow">{$t('home.stablecoins.eyebrow')}</p>
 			<h2>{$t('home.stablecoins.title')}</h2>
 			<p class="intro">{$t('home.stablecoins.intro')}</p>
@@ -301,7 +351,7 @@
 		draw={scene.credit.draw}
 		scrollLength={scene.credit.scrollLength}
 		let:progress
-		let:isStatic
+		let:static={isStatic}
 	>
 		<div class="beats">
 			{#each $t('home.scenes.credit.beats') as beat, i}
@@ -412,8 +462,36 @@
 			</div>
 			<p class="wide-copy">{$t('home.economics.body')}</p>
 		</section>
+	</div>
 
-		<section class="block" id="applications">
+	<!-- ===================== SCENE: applications ===================== -->
+	<PinnedScene
+		id="applications"
+		label={$t('home.scenes.applications.label')}
+		align={scene.applications.align}
+		draw={scene.applications.draw}
+		scrollLength={scene.applications.scrollLength}
+		let:progress
+		let:static={isStatic}
+	>
+		<div class="beats">
+			{#each $t('home.scenes.applications.beats') as beat, i}
+				<SceneBeat
+					{progress}
+					{isStatic}
+					from={scene.applications.beats[i].from}
+					to={scene.applications.beats[i].to}
+					hold={scene.applications.beats[i].hold}
+				>
+					<h2>{beat.h}</h2>
+					<p>{@html beat.p}</p>
+				</SceneBeat>
+			{/each}
+		</div>
+	</PinnedScene>
+
+	<div class="ground">
+		<section class="block">
 			<p class="eyebrow">{$t('home.applications.eyebrow')}</p>
 			<h2>{$t('home.applications.title')}</h2>
 			<p class="intro">{$t('home.applications.intro')}</p>

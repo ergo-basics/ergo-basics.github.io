@@ -167,6 +167,57 @@ export default {
 						p: 'On-chain reserves can be attached to <strong>reduce</strong> trust where trust runs out. You start with people and reach for the blockchain only when you need it.'
 					}
 				]
+			},
+			pillars: {
+				label: 'Four pillars',
+				beats: [
+					{
+						h: 'Four supports, not one.',
+						p: 'State-independent money needs a neutral ledger, stable value on top of it, a way in and out, and money people create for each other — each piece <strong>trust-minimized</strong> on its own.'
+					},
+					{
+						h: 'Each stands on its own.',
+						p: 'No pillar depends on the others working. One failing does not bring down the rest — that is what trust-minimized actually buys.'
+					},
+					{
+						h: 'Together, for the first time.',
+						p: 'kushti’s claim is that Ergo now has <strong>all four at once</strong> — the first ecosystem where that has been true.'
+					}
+				]
+			},
+			stablecoins: {
+				label: 'Stable value',
+				beats: [
+					{
+						h: 'One reserve backs it all.',
+						p: 'Every design here holds real <strong>ERG reserves</strong> rather than an uncollateralized algorithmic peg.'
+					},
+					{
+						h: 'Split into a stable claim and a volatile one.',
+						p: 'One side is insulated from the swings; the other <strong>absorbs the volatility</strong> in exchange for the upside.'
+					},
+					{
+						h: 'The ratio is the only thing that matters.',
+						p: 'Push the reserve too thin and the volatile side hits its floor first — the stable side is protected by construction, not by promise.'
+					}
+				]
+			},
+			applications: {
+				label: 'Oracles & bridges',
+				beats: [
+					{
+						h: 'Many publish, one box holds it.',
+						p: 'Oracle participants publish independently; the aggregate lands in a single <strong>on-chain box</strong>.'
+					},
+					{
+						h: 'Read, never consumed.',
+						p: 'Any number of contracts can reference that same box in the same block — nobody has to win a race to use it.'
+					},
+					{
+						h: 'The same posture, crossing chains.',
+						p: 'Rosen Bridge moves value between chains with <strong>watchers and guards</strong> doing the coordinating, Ergo as the anchor underneath.'
+					}
+				]
 			}
 		},
 
@@ -357,7 +408,7 @@ export default {
 					anchor: '#credit'
 				}
 			],
-			note: 'Presented as kushti’s thesis about the ecosystem, not as a neutral protocol fact. Pillars two and four in particular contain systems at very different maturity levels — see each section for status.'
+			note: 'Pillars two and four in particular contain systems at very different maturity levels — see each section for status.'
 		},
 
 		/* ---------------- Stablecoins ---------------- */
@@ -450,7 +501,7 @@ export default {
 				{
 					n: '01',
 					title: 'Decentralized block production',
-					text: 'Proof of Work is already a peer-to-peer market: anyone may generate a block. Ergo launched with weak non-outsourceability to prevent pool formation; it had drawbacks and pooling appeared anyway. Lithos now approaches the same goal through share proofs and collateral contracts, with new markets forming around mining itself. Testnet.'
+					text: 'Proof of Work is already a peer-to-peer market: anyone may generate a block, with no registry to join and no operator to pressure (see Proof of Work above). Lithos extends that market to mining itself rather than replacing it.'
 				},
 				{
 					n: '02',
@@ -460,7 +511,7 @@ export default {
 				{
 					n: '03',
 					title: 'Peer-to-peer mutual credit',
-					text: 'Basis: credit created on trust between people who need know nothing about Ergo or blockchains, with on-chain assets used only to reduce trust. The most direct expression of the thesis.'
+					text: 'Basis (see Mutual Credit above) is the most direct expression of the thesis: credit created between people, with the chain used only to reinforce trust where it runs out — never to grant permission.'
 				}
 			],
 			supportTitle: 'What makes all of it work better',
@@ -512,7 +563,7 @@ export default {
 				{
 					title: 'Reputation proofs',
 					status: 'Live · no EIP yet',
-					text: 'Represents trust as ordinary Ergo boxes: a reputation token carries a positive or negative claim plus optional delegation, so each user builds their own trust graph instead of relying on one global score. Ergo has no central development team gatekeeping what gets built on it — anyone can ship a standard, and this is one such standard, reused across the same circle of projects: Celaut’s distributed service-execution paradigm uses it for node and service trust, a fully on-chain forum and a hash-based file-discovery directory build directly on it, and so do Bene’s own campaign discussions. Game of Prompts goes further still, using reputation proofs and on-chain opinions to vet the judges and creators running its bot competitions. Live on Ergo mainnet, with no EIP and no published staking parameters yet.',
+					text: 'Represents trust as ordinary Ergo boxes: a reputation token carries a positive or negative claim plus optional delegation, so each user builds their own trust graph instead of relying on one global score. Reused across the same circle of projects: Celaut’s distributed service-execution paradigm uses it for node and service trust, a fully on-chain forum and a hash-based file-discovery directory build directly on it, and so do Bene’s own campaign discussions. Game of Prompts goes further still, using reputation proofs and on-chain opinions to vet the judges and creators running its bot competitions. Live on Ergo mainnet, with no EIP and no published staking parameters yet.',
 					link: 'https://docs.ergoplatform.com/eco/reputation-system/'
 				}
 			],

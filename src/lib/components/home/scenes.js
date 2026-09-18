@@ -13,9 +13,15 @@
  *   2. sigma  — Sigma propositions composed with AND / OR / threshold.
  *   3. pow    — permissionless block production vs a coordinated
  *               validator set that has relays to lean on.
- *   4. rent   — storage rent: dormant boxes age, then are collected.
- *   5. credit — Basis / ChainCash: IOU notes moving along trust edges,
- *               anchored by optional on-chain reserves.
+ *   4. rent    — storage rent: dormant boxes age, then are collected.
+ *   5. pillars — four supports rising independently, then one structure
+ *                resting on all four at once.
+ *   6. stablecoins — one reserve, split into a stable claim and a
+ *                     volatile one that absorbs the swings.
+ *   7. credit  — Basis / ChainCash: IOU notes moving along trust edges,
+ *                anchored by optional on-chain reserves.
+ *   8. applications — an oracle box published once and read by many,
+ *                      then the same posture crossing chains.
  *
  * Everything is drawn from the theme palette so both themes work, and
  * every scene must look correct at progress = 1 — that is the single
@@ -597,7 +603,188 @@ export function drawRent(ctx, { width, height, progress, palette, mouse, time })
 }
 
 /* ==================================================================
- * SCENE 5 — MUTUAL CREDIT (ChainCash / Basis)
+ * SCENE 5 — FOUR PILLARS
+ *
+ * Four columns rise independently, staggered — each one standing on
+ * its own, nothing shared between them yet. Once all four are up, a
+ * single beam lowers to rest on all of them at once: kushti's claim
+ * that the ecosystem now has all four pillars simultaneously, not a
+ * roof forced down before its supports existed.
+ * ================================================================== */
+export function drawPillars(ctx, { width, height, progress, palette, mouse, time }) {
+	backdrop(ctx, width, height, palette, progress, mouse, 'left');
+	const { cx, cy, scale } = stage(width, height, 'left');
+
+	const n = 4;
+	const pw = 46 * scale;
+	const gap = 34 * scale;
+	const totalW = n * pw + (n - 1) * gap;
+	const maxH = 200 * scale;
+	const baseY = cy + maxH * 0.5;
+	const ox = cx - totalW / 2;
+
+	const rise = phase(progress, 0.04, 0.6);
+	const roofDrop = phase(progress, 0.62, 0.88);
+	const settle = phase(progress, 0.86, 1.0);
+
+	// Baseline.
+	ctx.save();
+	ctx.globalAlpha = rise * 0.5;
+	ctx.strokeStyle = rgba(palette.onSurfaceRgb, 0.25);
+	ctx.lineWidth = 1.4 * scale;
+	ctx.beginPath();
+	ctx.moveTo(ox - 14 * scale, baseY);
+	ctx.lineTo(ox + totalW + 14 * scale, baseY);
+	ctx.stroke();
+	ctx.restore();
+
+	let minTopY = baseY;
+	for (let i = 0; i < n; i++) {
+		const t = phase(progress, 0.04 + i * 0.1, 0.4 + i * 0.1);
+		if (t <= 0.01) continue;
+		const h = maxH * t;
+		const x = ox + i * (pw + gap);
+		const y = baseY - h;
+		minTopY = Math.min(minTopY, y);
+
+		ctx.save();
+		ctx.globalAlpha = Math.min(1, t * 1.4);
+		roundRect(ctx, x, y, pw, h, 8 * scale);
+		ctx.fillStyle = rgba(palette.surfaceDeepRgb, 0.9);
+		ctx.fill();
+		ctx.lineWidth = 1.6 * scale;
+		ctx.strokeStyle = roofDrop > 0.05 ? palette.accent : rgba(palette.onSurfaceRgb, 0.36);
+		ctx.stroke();
+		// Fluting, so the shape reads as a column rather than a bar chart.
+		ctx.globalAlpha *= 0.4;
+		ctx.strokeStyle = rgba(palette.onSurfaceRgb, 0.3);
+		ctx.lineWidth = scale;
+		for (let f = 1; f < 3; f++) {
+			const fx = x + (pw / 3) * f;
+			ctx.beginPath();
+			ctx.moveTo(fx, y + 6 * scale);
+			ctx.lineTo(fx, y + h - 6 * scale);
+			ctx.stroke();
+		}
+		ctx.restore();
+		label(ctx, String(i + 1).padStart(2, '0'), x + pw / 2, baseY + 22 * scale, palette, t * 0.85, 11 * scale);
+	}
+
+	// The beam, lowering onto all four once they are standing.
+	if (roofDrop > 0.01) {
+		const restY = minTopY - 10 * scale;
+		const startY = restY - 140 * scale;
+		const beamY = startY + (restY - startY) * Math.min(1, roofDrop * 1.4);
+		ctx.save();
+		ctx.globalAlpha = roofDrop;
+		roundRect(ctx, ox - 10 * scale, beamY, totalW + 20 * scale, 14 * scale, 6 * scale);
+		ctx.fillStyle = settle > 0.05 ? palette.accent : rgba(palette.onSurfaceRgb, 0.5);
+		ctx.fill();
+		ctx.restore();
+	}
+
+	// A quiet pulse once it has settled — one structure, at last.
+	if (settle > 0.02) {
+		ctx.save();
+		ctx.globalAlpha = settle * (0.4 + 0.3 * Math.sin(time * 2));
+		const g = ctx.createRadialGradient(cx, minTopY, 0, cx, minTopY, totalW * 0.7);
+		g.addColorStop(0, rgba(palette.onSurfaceRgb, 0.14));
+		g.addColorStop(1, 'rgba(0,0,0,0)');
+		ctx.fillStyle = g;
+		ctx.fillRect(ox - 60 * scale, minTopY - 80 * scale, totalW + 120 * scale, 160 * scale);
+		ctx.restore();
+	}
+
+	label(ctx, 'FOUR PILLARS, ONE STRUCTURE', cx, baseY + 52 * scale, palette, rise * 0.9, 11 * scale);
+}
+
+/* ==================================================================
+ * SCENE 6 — STABLECOINS: ONE RESERVE, TWO CLAIMS
+ *
+ * A single tank of ERG splits into two bars: one stays flat and
+ * steady (the stable claim), the other visibly wobbles (the claim
+ * that absorbs volatility in exchange for upside). A dashed floor
+ * marks the collateral threshold the volatile side would hit first —
+ * the mechanism every design on this page shares, drawn once instead
+ * of argued about four times in prose.
+ * ================================================================== */
+export function drawStablecoins(ctx, { width, height, progress, palette, mouse, time }) {
+	backdrop(ctx, width, height, palette, progress, mouse, 'right');
+	const { cx, cy, scale } = stage(width, height, 'right');
+
+	const appear = phase(progress, 0.02, 0.26);
+	const split = phase(progress, 0.28, 0.6);
+	const wobbleIn = phase(progress, 0.5, 0.8);
+	const floorIn = phase(progress, 0.66, 0.92);
+
+	const tankW = 88 * scale;
+	const barW = 54 * scale;
+	const tankH = 200 * scale;
+	const baseY = cy + tankH / 2;
+	const topY = baseY - tankH;
+	const gapMax = 26 * scale;
+
+	// Both bars share one formula and fully coincide at split = 0 — so
+	// there is no single/split branch, just one tank pulling itself
+	// apart into two as `split` rises.
+	const w = tankW + (barW - tankW) * split;
+	const half = (barW / 2 + gapMax / 2) * split;
+	const stableX = cx - half - w / 2;
+	const volX = cx + half - w / 2;
+	const fill = 0.86 - 0.24 * split;
+
+	/** Draws one tank; returns the liquid's top y, for the floor check. */
+	function tank(x, wobbleAmp) {
+		ctx.save();
+		ctx.globalAlpha = appear;
+		roundRect(ctx, x, topY, w, tankH, 10 * scale);
+		ctx.fillStyle = rgba(palette.surfaceDeepRgb, 0.92);
+		ctx.fill();
+		ctx.lineWidth = 1.6 * scale;
+		ctx.strokeStyle = rgba(palette.onSurfaceRgb, 0.34);
+		ctx.stroke();
+		ctx.restore();
+
+		const wobble = wobbleAmp ? Math.sin(time * 1.6) * wobbleAmp : 0;
+		const h = tankH * Math.max(0.1, Math.min(0.96, fill + wobble));
+		ctx.save();
+		ctx.globalAlpha = appear * 0.9;
+		roundRect(ctx, x + 4 * scale, baseY - h, w - 8 * scale, h - 4 * scale, 6 * scale);
+		ctx.fillStyle = wobbleAmp ? palette.accentText : palette.accent;
+		ctx.fill();
+		ctx.restore();
+		return baseY - h;
+	}
+
+	const volTop = tank(volX, 0.22 * wobbleIn * split);
+	tank(stableX, 0);
+
+	if (split > 0.4) {
+		label(ctx, 'STABLE', stableX + w / 2, baseY + 26 * scale, palette, split * 0.9, 10.5 * scale);
+		label(ctx, 'RESERVE', volX + w / 2, baseY + 26 * scale, palette, split * 0.9, 10.5 * scale);
+	}
+
+	if (floorIn > 0.02) {
+		const floorY = baseY - tankH * 0.32;
+		const below = volTop > floorY - 4 * scale;
+		ctx.save();
+		ctx.globalAlpha = floorIn;
+		ctx.setLineDash([4 * scale, 4 * scale]);
+		ctx.strokeStyle = below ? palette.warm : rgba(palette.onSurfaceRgb, 0.4);
+		ctx.lineWidth = 1.4 * scale;
+		ctx.beginPath();
+		ctx.moveTo(volX - 10 * scale, floorY);
+		ctx.lineTo(volX + w + 10 * scale, floorY);
+		ctx.stroke();
+		ctx.restore();
+		label(ctx, 'RESERVE RATIO FLOOR', volX + w / 2, floorY - 10 * scale, palette, floorIn * 0.85, 9.5 * scale);
+	}
+
+	label(ctx, 'ONE RESERVE, TWO CLAIMS ON IT', cx, topY - 28 * scale, palette, appear * 0.9, 11 * scale);
+}
+
+/* ==================================================================
+ * SCENE 7 — MUTUAL CREDIT (ChainCash / Basis)
  *
  * A note is issued by one peer and passes along a trust graph. Each
  * holder co-signs, so the ring of signatures around it thickens as it
@@ -722,6 +909,149 @@ export function drawCredit(ctx, { width, height, progress, palette, mouse, time 
 	);
 }
 
+/* ==================================================================
+ * SCENE 8 — ORACLES & BRIDGES
+ *
+ * Several oracle nodes publish into one shared box; that box is never
+ * consumed, so any number of contracts below can read it in the same
+ * block — dashed lines, because reading is not spending. The same
+ * trust-minimized posture then reappears at the foot of the scene as
+ * a bridge: value crossing between two chains, watched and guarded
+ * rather than custodied.
+ * ================================================================== */
+export function drawApplications(ctx, { width, height, progress, palette, mouse, time }) {
+	backdrop(ctx, width, height, palette, progress, mouse, 'right');
+	const { cx, cy, scale } = stage(width, height, 'right');
+
+	const publish = phase(progress, 0.03, 0.32);
+	const read = phase(progress, 0.3, 0.58);
+	const bridgeIn = phase(progress, 0.58, 0.92);
+
+	const oracleY = cy - 150 * scale;
+	const boxY = cy - 40 * scale;
+	const contractY = cy + 60 * scale;
+
+	const oracles = [-1.5, -0.5, 0.5, 1.5].map((k) => ({ x: cx + k * 46 * scale, y: oracleY }));
+
+	// Publish lines, converging.
+	ctx.save();
+	ctx.lineWidth = 1.3 * scale;
+	oracles.forEach((o, i) => {
+		const t = phase(progress, 0.03 + i * 0.03, 0.22 + i * 0.03);
+		if (t <= 0.01) return;
+		ctx.globalAlpha = t * 0.55;
+		ctx.strokeStyle = palette.link;
+		ctx.beginPath();
+		ctx.moveTo(o.x, o.y + 12 * scale);
+		ctx.lineTo(cx, boxY - 14 * scale);
+		ctx.stroke();
+	});
+	ctx.restore();
+
+	oracles.forEach((o, i) => {
+		const t = phase(progress, 0.03 + i * 0.03, 0.22 + i * 0.03);
+		if (t <= 0.01) return;
+		ctx.save();
+		ctx.globalAlpha = t;
+		ctx.beginPath();
+		ctx.arc(o.x, o.y, 10 * scale, 0, Math.PI * 2);
+		ctx.fillStyle = rgba(palette.surfaceDeepRgb, 0.94);
+		ctx.fill();
+		ctx.lineWidth = 1.4 * scale;
+		ctx.strokeStyle = palette.accentText;
+		ctx.stroke();
+		ctx.restore();
+	});
+
+	// The shared box: published once, never consumed.
+	if (publish > 0.02) {
+		ctx.save();
+		ctx.globalAlpha = publish;
+		roundRect(ctx, cx - 44 * scale, boxY - 16 * scale, 88 * scale, 32 * scale, 8 * scale);
+		ctx.fillStyle = rgba(palette.surfaceDeepRgb, 0.95);
+		ctx.fill();
+		ctx.lineWidth = 1.6 * scale;
+		ctx.strokeStyle = palette.accent;
+		ctx.stroke();
+		ctx.restore();
+		label(ctx, 'ORACLE BOX', cx, boxY + 5 * scale, palette, publish, 10.5 * scale);
+	}
+
+	// Data inputs: several contracts read the same box at once.
+	const contracts = [-1, 0, 1].map((k) => ({ x: cx + k * 70 * scale, y: contractY }));
+	contracts.forEach((c, i) => {
+		const t = phase(progress, 0.3 + i * 0.04, 0.5 + i * 0.04);
+		if (t <= 0.01) return;
+		ctx.save();
+		ctx.globalAlpha = t * 0.6;
+		ctx.setLineDash([4 * scale, 5 * scale]);
+		ctx.strokeStyle = rgba(palette.onSurfaceRgb, 0.4);
+		ctx.lineWidth = 1.3 * scale;
+		ctx.beginPath();
+		ctx.moveTo(cx, boxY + 16 * scale);
+		ctx.lineTo(c.x, c.y - 14 * scale);
+		ctx.stroke();
+		ctx.restore();
+
+		ctx.save();
+		ctx.globalAlpha = t;
+		roundRect(ctx, c.x - 24 * scale, c.y - 14 * scale, 48 * scale, 28 * scale, 6 * scale);
+		ctx.fillStyle = rgba(palette.surfaceDeepRgb, 0.9);
+		ctx.fill();
+		ctx.lineWidth = 1.4 * scale;
+		ctx.strokeStyle = rgba(palette.onSurfaceRgb, 0.4);
+		ctx.stroke();
+		ctx.restore();
+	});
+	if (read > 0.05) {
+		label(ctx, 'READ, NEVER CONSUMED', cx, contractY + 34 * scale, palette, read * 0.9, 11 * scale);
+	}
+
+	// The bridge: the same posture, moved to crossing chains.
+	if (bridgeIn > 0.02) {
+		const by = cy + 190 * scale;
+		const leftX = cx - 130 * scale;
+		const rightX = cx + 130 * scale;
+		ctx.save();
+		ctx.globalAlpha = bridgeIn;
+		ctx.strokeStyle = rgba(palette.onSurfaceRgb, 0.3);
+		ctx.lineWidth = 1.6 * scale;
+		ctx.beginPath();
+		ctx.moveTo(leftX, by);
+		ctx.lineTo(rightX, by);
+		ctx.stroke();
+		ctx.restore();
+
+		[leftX, rightX].forEach((x) => {
+			ctx.save();
+			ctx.globalAlpha = bridgeIn;
+			ctx.beginPath();
+			ctx.arc(x, by, 12 * scale, 0, Math.PI * 2);
+			ctx.fillStyle = palette.accent;
+			ctx.fill();
+			ctx.restore();
+		});
+
+		// Watchers/guards, off the line itself.
+		[0.3, 0.7].forEach((k) => {
+			const wx = leftX + (rightX - leftX) * k;
+			ctx.save();
+			ctx.globalAlpha = bridgeIn * 0.8;
+			ctx.beginPath();
+			ctx.arc(wx, by - 22 * scale, 4 * scale, 0, Math.PI * 2);
+			ctx.fillStyle = palette.accentText;
+			ctx.fill();
+			ctx.restore();
+		});
+
+		const k = (Math.sin(time * 1.2) + 1) / 2;
+		packet(ctx, leftX, by, rightX, by, k, palette.accent, bridgeIn, 3.4 * scale);
+		label(ctx, 'WATCHED · GUARDED', cx, by + 30 * scale, palette, bridgeIn * 0.9, 11 * scale);
+	}
+
+	label(ctx, 'ONE BOX, MANY READERS', cx, oracleY - 30 * scale, palette, publish * 0.85, 11 * scale);
+}
+
 /**
  * Scene table for the landing page. `beats` carry only timings; the
  * words come from the dictionary under `home.scenes.<id>.beats[n]`.
@@ -772,6 +1102,28 @@ export const homeScenes = [
 		]
 	},
 	{
+		id: 'pillars',
+		draw: drawPillars,
+		scrollLength: 2.6,
+		align: 'left',
+		beats: [
+			{ from: 0.0, to: 0.34 },
+			{ from: 0.32, to: 0.66 },
+			{ from: 0.64, to: 1.0, hold: true }
+		]
+	},
+	{
+		id: 'stablecoins',
+		draw: drawStablecoins,
+		scrollLength: 2.6,
+		align: 'right',
+		beats: [
+			{ from: 0.0, to: 0.34 },
+			{ from: 0.32, to: 0.66 },
+			{ from: 0.64, to: 1.0, hold: true }
+		]
+	},
+	{
 		id: 'credit',
 		draw: drawCredit,
 		scrollLength: 2.6,
@@ -780,6 +1132,17 @@ export const homeScenes = [
 			{ from: 0.0, to: 0.34 },
 			{ from: 0.32, to: 0.66 },
 			{ from: 0.64, to: 1.0, hold: true }
+		]
+	},
+	{
+		id: 'applications',
+		draw: drawApplications,
+		scrollLength: 2.8,
+		align: 'right',
+		beats: [
+			{ from: 0.0, to: 0.34 },
+			{ from: 0.32, to: 0.62 },
+			{ from: 0.6, to: 1.0, hold: true }
 		]
 	}
 ];
